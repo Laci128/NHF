@@ -19,6 +19,10 @@ public:
 		:vezeteknev(vezetek), keresztnev(kereszt), kov(NULL)
 	{}
 
+	String& getVeznev() { return vezeteknev; }
+	String& getKernev() { return keresztnev; }
+
+
 	/// Destruktor
 	virtual ~Bejegyzes() {}
 
@@ -35,6 +39,15 @@ public:
 		:Bejegyzes(vezetek, kereszt), becenev(nick), privat_telszam(priv_tel)
 	{}
 
+
+	Bejegyzes* keres_barat(Bejegyzes* megnezendo, String const& adat) {
+		Barat* temp = dynamic_cast<Barat*>(megnezendo);
+		if (temp == NULL)
+			return false;
+		if (temp->becenev == adat || temp->privat_telszam == adat || temp->getVeznev() == adat || temp->getKernev() == adat)
+			return this;
+
+	}
 
 	void kiir(std::ostream os) const;
 
@@ -54,6 +67,11 @@ public:
 		:Bejegyzes(vezetek, kereszt), munkahelyi_telszam(munk_tel)
 	{}
 
+
+
+	Bejegyzes* keres_munkatars(Bejegyzes* megnezendo, String const& adat) {
+
+	}
 
 	void kiir(std::ostream os) const;
 

@@ -42,6 +42,7 @@ public:
 	void hozzaad(Bejegyzes const& hozzaadando);
 	
 	///Kikeres egy Bejegyzest a Telefonkonyvbol egy megadott adat alapjan
+	
 	template <class Funktor>
 	Bejegyzes* kereses(String const& adat, Funktor fun) {
 		akt = elso;
@@ -59,13 +60,8 @@ public:
 
 };
 
-bool keres_barat(Bejegyzes* megnezendo, String const& adat) {
-	
-}
 
-bool keres_munkatars(Bejegyzes* megnezendo, String const& adat) {
 
-}
 
 
 #endif
