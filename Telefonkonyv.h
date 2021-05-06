@@ -11,8 +11,6 @@
 class Telefonkonyv : public Szerializal
 {
 private:
-	/*size_t db;               ///Bejegyzesek jelenlegi szama
-	Bejegyzes** bejegyzesek;   ///Bejegyzesek dinamikus tombje*/
 	Bejegyzes* elso;           ///a Telefonkonyv 
 	Bejegyzes* akt;
 
@@ -36,10 +34,27 @@ public:
 	};
 
 	///Kitorli a torlendo Bejegyzest a Telefonkonyvbol
-	void torol(Bejegyzes const& torlendo);
+	///**Felbehagytam**
+	void torol(Bejegyzes& torlendo) {
+		if(*elso == torlendo)
+		
+		
+		
+		akt = elso;
+		Bejegyzes* lemarado = elso;
+		while (!(*akt == torlendo)) {
+			akt = akt->getKov();
+		}
+
+	}
 
 	///Hozzaadja a hozzaadando Bejegyzest a Telefonkonyvbe  
-	void hozzaad(Bejegyzes const& hozzaadando);
+	void hozzaad(Bejegyzes const& hozzaadando) {
+		while (akt != NULL){
+			akt = akt->getKov();
+		}
+		*akt = hozzaadando;
+	}
 	
 	///Kikeres egy Bejegyzest a Telefonkonyvbol egy megadott adat alapjan
 	
@@ -48,15 +63,21 @@ public:
 		akt = elso;
 		while (akt != NULL) {
 			fun(*akt, adat);
-			akt = akt->kov;
+			akt = akt->getKov();
 		}
 		return NULL;
 	}
+	
 
+	void kiir(std::ostream& os, char szep = '\n') const {
+		Bejegyzes* mozgo = elso;
+		while (mozgo != NULL) {
+			mozgo->kiir(os);
+		}
 
-	void kiir(std::ostream os) const;
+	}
 
-	void beolvas(std::istream& is) ;
+	void beolvas(std::istream& is);
 
 };
 

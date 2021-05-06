@@ -11,7 +11,7 @@ class Bejegyzes : public Szerializal
 private:
 	String vezeteknev;
 	String keresztnev;
-	Bejegyzes* kov;       //pointer a kovetkezo Bejegyzesre Telefonkonyvben
+	Bejegyzes* kov;     //pointer a kovetkezo Bejegyzesre Telefonkonyvben
 
 public:
 	///Konstruktor
@@ -19,9 +19,12 @@ public:
 		:vezeteknev(vezetek), keresztnev(kereszt), kov(NULL)
 	{}
 
-	String& getVeznev() { return vezeteknev; }
-	String& getKernev() { return keresztnev; }
+	String getVeznev() const { return vezeteknev; }
+	String getKernev() const { return keresztnev; }
+	Bejegyzes* getKov() const { return kov; }
 
+	//Virtualis osszehasonlito operator, hogy a leszarmazottaket megfeleloen hasznalja
+	virtual bool operator==(Bejegyzes const& rhs) = 0;
 
 	/// Destruktor
 	virtual ~Bejegyzes() {}
@@ -40,18 +43,35 @@ public:
 	{}
 
 
+	bool operator==(Barat const& rhs) {
+		return(this->becenev == rhs.becenev && this->privat_telszam == rhs.privat_telszam && this->getVeznev() == rhs.getVeznev() && this->getKernev() == rhs.getKernev());
+	}
+
+
+
+	///Ez szerintem igy jo, de igy is generikus a kereses a Telefonkonyvben???
 	Bejegyzes* keres_barat(Bejegyzes* megnezendo, String const& adat) {
 		Barat* temp = dynamic_cast<Barat*>(megnezendo);
 		if (temp == NULL)
 			return false;
 		if (temp->becenev == adat || temp->privat_telszam == adat || temp->getVeznev() == adat || temp->getKernev() == adat)
 			return this;
+	}
+
+	void kiir(std::ostream& os) const {
+		getVeznev().kiir(os);
+		getKernev().kiir(os);
+		becenev.kiir(os);
+		privat_telszam.kiir(os);
 
 	}
 
-	void kiir(std::ostream os) const;
-
-	void beolvas(std::istream& is);
+	void beolvas(std::istream& is) {
+		getVeznev().beolvas(is);
+		getKernev().beolvas(is);
+		becenev.beolvas(is);
+		privat_telszam.beolvas(is);
+	}
 
 	~Barat() {}
 
@@ -67,15 +87,24 @@ public:
 		:Bejegyzes(vezetek, kereszt), munkahelyi_telszam(munk_tel)
 	{}
 
-
-
-	Bejegyzes* keres_munkatars(Bejegyzes* megnezendo, String const& adat) {
-
+	bool operator==(Munkatars const& rhs) {
+		return(this->munkahelyi_telszam == rhs.munkahelyi_telszam && this->getVeznev() == rhs.getVeznev() && this->getKernev() == rhs.getKernev());
 	}
 
-	void kiir(std::ostream os) const;
+	Bejegyzes* keres_munkatars(Bejegyzes* megnezendo, String const& adat);
 
-	void beolvas(std::istream& is);
+	
+	void kiir(std::ostream& os) const {
+		getVeznev().kiir(os);
+		getKernev().kiir(os);
+		munkahelyi_telszam.kiir(os);
+	}
+
+	void beolvas(std::istream& is) {
+		getVeznev().beolvas(is);
+		getKernev().beolvas(is);
+		munkahelyi_telszam.beolvas(is);
+	}
 
 	~Munkatars() {}
 

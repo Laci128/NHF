@@ -12,8 +12,6 @@
 A String osztály.
 A 'pData'-ban vannak a karakterek (a lezáró nullával együtt), 'len' a hossza.
 A hosszba nem számít bele a lezáró nulla.
- 
-
  */
 class String : public Szerializal
 {
@@ -34,16 +32,14 @@ public:
 
     /// Parameter nelkuli konstruktor:
     String() 
-        : Szerializal()
-        , pData(nullptr)
+        : pData(nullptr)
         , len(0)
     {}
 
     ///Egyparameteres konstruktor, egyben konverzios konstruktor
     ///Egyetlen karakterbol csinal String-et
     String(char c)
-        : Szerializal()
-        , pData(new char[2])
+        : pData(new char[2])
         , len(1)
     {
         pData[0] = c;
@@ -53,8 +49,7 @@ public:
     /// Egyparaméteres konstruktor
     /// C-sztringbol csinal String-et
     String(char const* str)
-        : Szerializal()
-        , pData(new char[strlen(str) + 1])
+        : pData(new char[strlen(str) + 1])
         , len(strlen(str))
     {
         strcpy(pData, str);
@@ -65,8 +60,7 @@ public:
 
     ///Masolo konstruktor
     String(String const& rhs)
-        : Szerializal()
-        , pData(nullptr)
+        : pData(nullptr)
     {
         *this = rhs;
     }
@@ -100,6 +94,10 @@ public:
         return res;
     }
 
+
+    ///+ operator: Stringhez jobbrol ad hozza karaktert
+    String operator+(char rhs_c) const { return *this + String(rhs_c); }
+
     ///== operator
     bool operator==(String const& rhs) {
         return (strcmp(pData, rhs.pData) == 0);
@@ -107,18 +105,27 @@ public:
 
 
 
-    void kiir(std::ostream os) const;
 
-    void beolvas(std::istream& is);
+
+    void kiir(std::ostream& os) const {
+        os.write(pData, len);
+        os << '\t';
+    }
+
+    void beolvas(std::istream& is) {
+        *this = "";
+        char c;
+        is >> c;
+        while (c != '\t')
+        {
+            *this = *this + c;
+            is >> c;
+        }
+
+    }
+        
 
 }; 
-
-
-///+ operator: String-hez jobbról karaktert ad
-String operator+(char c, String const& str) {
-    return String(c) + str;
-}
-
 
 
 #endif

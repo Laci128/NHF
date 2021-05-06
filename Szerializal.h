@@ -7,7 +7,7 @@ class Szerializal
 {
 public:	
 	///
-	virtual void kiir(std::ostream os) const = 0;
+	virtual void kiir(std::ostream& os) const = 0;
 
 	///
 	virtual void beolvas(std::istream& is) = 0;
