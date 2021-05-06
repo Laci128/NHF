@@ -41,12 +41,13 @@ public:
 	///Hozzaadja a hozzaadando Bejegyzest a Telefonkonyvbe  
 	void hozzaad(Bejegyzes const& hozzaadando);
 	
-	///Kikeresi a keresendo Bejegyzest a Telefonkonyvbol
+	///Kikeres egy Bejegyzest a Telefonkonyvbol egy megadott adat alapjan
 	template <class Funktor>
-	Bejegyzes* kereses(Bejegyzes* elso,String const& ad, Funktor fun) {
-		while (elso != NULL) {
-			fun(*elso);
-			elso = elso->kov;
+	Bejegyzes* kereses(String const& adat, Funktor fun) {
+		akt = elso;
+		while (akt != NULL) {
+			fun(*akt, adat);
+			akt = akt->kov;
 		}
 		return NULL;
 	}
@@ -58,11 +59,11 @@ public:
 
 };
 
-bool keres_barat(Bejegyzes* akt) {
-
+bool keres_barat(Bejegyzes* megnezendo, String const& adat) {
+	
 }
 
-bool keres_munkatars(Bejegyzes* akt) {
+bool keres_munkatars(Bejegyzes* megnezendo, String const& adat) {
 
 }
 

@@ -11,7 +11,7 @@ class Bejegyzes : public Szerializal
 private:
 	String vezeteknev;
 	String keresztnev;
-	Bejegyzes* kov;       //pointer 
+	Bejegyzes* kov;       //pointer a kovetkezo Bejegyzesre Telefonkonyvben
 
 public:
 	///Konstruktor

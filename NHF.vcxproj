@@ -140,11 +140,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Bejegyzes.h" />
+    <ClInclude Include="menu.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="Szerializal.h" />
     <ClInclude Include="Telefonkonyv.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="NHF_tesztek.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

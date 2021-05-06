@@ -13,7 +13,7 @@ public:
 	virtual void beolvas(std::istream& is) = 0;
 
 	///Destruktor
-	virtual ~Szerializal();
+	virtual ~Szerializal() {};
 
 };
 
