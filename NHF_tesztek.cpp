@@ -78,6 +78,14 @@ int main(void)
 		std::cout << "\nHurra, az osszes teszt hibatlan!"  << std::endl;
 	*/
 
+
+String test1 = "ez egy nagyon hosszu szoveg"
+String test2 = "egy"
+
+
+
+
+
 	Telefonkonyv T1;
 	Telefonkonyv T2;
 

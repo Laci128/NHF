@@ -103,13 +103,22 @@ public:
         return (strcmp(pData, rhs.pData) == 0);
     }
 
-
-    bool contains (const String keresendo) const {
-int kerLen=keresendo.size();
-const char* data=keresendo.c_str();
-
+    bool contains(const String keresendo) const
+    {
+        int kerLen = keresendo.size();
+        const char *data = keresendo.c_str();
+        int kerPos = 0;
+        for (int i = 0; i < len; i++)
+        {
+            if (pData[i] == data[kerPos])
+                kerPos++;
+            else
+                kerPos = 0;
+            if (kerPos == kerLen)
+                return true;
+        }
+        return false;
     }
-
 
     void kiir(std::ostream& os) const {
         os.write(pData, len);
