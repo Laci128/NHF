@@ -32,5 +32,8 @@
     <ClCompile Include="NHF_tesztek.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Telefonkonyv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
