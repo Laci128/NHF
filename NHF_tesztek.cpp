@@ -3,6 +3,7 @@
 #endif
 
 #include <iostream>
+#include <fstream>
 
 #include "Szerializal.h"
 #include "String.h"
@@ -11,7 +12,7 @@
 
 
 int main(void) 
-{	
+{	/*
 	int Osszes_teszt = 3;
 	int Hibas_teszt = 0;
 
@@ -75,7 +76,27 @@ int main(void)
 
 	if(Hibas_teszt == 0)
 		std::cout << "\nHurra, az osszes teszt hibatlan!"  << std::endl;
+	*/
 
+	Telefonkonyv T1;
+	Telefonkonyv T2;
+
+
+	std::ifstream olvasott_fajl;
+	olvasott_fajl.open("Test_beolvas.txt");
+	T1.beolvas(olvasott_fajl);
+	olvasott_fajl.close();
+
+	T1.kiir(std::cout);
+	
+	std::ofstream irando_fajl;
+	irando_fajl.open("Test_kiir.txt");
+	T1.kiir(irando_fajl);
+	irando_fajl.close();
+	
+
+
+	
 
 	return 0;
 }

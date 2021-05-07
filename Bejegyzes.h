@@ -22,6 +22,7 @@ public:
 	String getVeznev() const { return vezeteknev; }
 	String getKernev() const { return keresztnev; }
 	Bejegyzes* getKov() const { return kov; }
+	void setKov(Bejegyzes* kovetkezo) { kov = kovetkezo; }
 
 	//Virtualis osszehasonlito operator, hogy a leszarmazottaket megfeleloen hasznalja
 	virtual bool operator==(Bejegyzes const& rhs) = 0;
@@ -48,7 +49,7 @@ public:
 	}
 
 
-
+	/*
 	///Ez szerintem igy jo, de igy is generikus a kereses a Telefonkonyvben???
 	Bejegyzes* keres_barat(Bejegyzes* megnezendo, String const& adat) {
 		Barat* temp = dynamic_cast<Barat*>(megnezendo);
@@ -56,7 +57,7 @@ public:
 			return false;
 		if (temp->becenev == adat || temp->privat_telszam == adat || temp->getVeznev() == adat || temp->getKernev() == adat)
 			return this;
-	}
+	}*/
 
 	void kiir(std::ostream& os) const {
 		getVeznev().kiir(os);

@@ -35,7 +35,7 @@ public:
 
 	///Kitorli a torlendo Bejegyzest a Telefonkonyvbol
 	///**Felbehagytam**
-	void torol(Bejegyzes& torlendo) {
+	void torol(Bejegyzes& torlendo);/* {
 		if(*elso == torlendo)
 		
 		
@@ -46,7 +46,7 @@ public:
 			akt = akt->getKov();
 		}
 
-	}
+	}*/
 
 	///Hozzaadja a hozzaadando Bejegyzest a Telefonkonyvbe  
 	void hozzaad(Bejegyzes const& hozzaadando) {
@@ -69,15 +69,30 @@ public:
 	}
 	
 
-	void kiir(std::ostream& os, char szep = '\n') const {
+	void kiir(std::ostream& os) const {
 		Bejegyzes* mozgo = elso;
 		while (mozgo != NULL) {
 			mozgo->kiir(os);
+			os << '\n';
 		}
-
 	}
 
-	void beolvas(std::istream& is);
+	void beolvas(std::istream& is) {
+		Bejegyzes temp;
+		akt = &temp;
+		char c;
+		akt->beolvas(is);
+		akt = akt->getKov();
+		is >> c;
+		elso = akt;
+		while (c != EOF && c == '\n')
+		{
+			akt->beolvas(is);
+			akt = akt->getKov();
+			is >> c;
+		}
+		akt->setKov(NULL);
+	}
 
 };
 
