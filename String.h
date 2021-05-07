@@ -8,32 +8,31 @@
 
 #include "Szerializal.h"
 
-#ifdef _MSC_VER
-// MSC ne adjon figyelmeztető üzenetet a stringkezelő függvényekre.
+
 #define _CRT_SECURE_NO_WARNINGS
-#endif
+
 
 
 
 /**
-A String oszt�ly.
-A 'pData'-ban vannak a karakterek (a lez�r� null�val egy�tt), 'len' a hossza.
-A hosszba nem sz�m�t bele a lez�r� nulla.
+A String osztaly.
+A 'pData'-ban vannak a karakterek (a lezaro nullaval egyutt), 'len' a hossza.
+A hosszba nem szamit bele a lezaro nulla.
  */
 class String : public Szerializal
 {
 private:
     char* pData;        ///< pointer az adatra
-    size_t len;         ///< hossz lez�r� nulla n�lk�l
+    size_t len;         ///< hossz lezaro nulla nelkul
 
 public:
 
-    /// Sztring hossz�t adja vissza.
-    /// @return sztring t�nyleges hossza (lez�r� nulla n�lk�l).
+    /// Sztring hosszat adja vissza.
+    /// @return sztring tenyleges hossza (lezaro nulla nelkul).
     size_t size() const { return len; }
 
     /// C-sztringet ad vissza
-    /// @return pointer a t�rolt, vagy azzal azonos tartalm� null�val lez�rt sztring-re.
+    /// @return pointer a tarolt, vagy azzal azonos tartalma nullaval lezart sztring-re.
     const char* c_str() const { return pData == nullptr ? "" : pData; }
 
 
@@ -53,7 +52,7 @@ public:
         pData[1] = '\0';
     }
 
-    /// Egyparam�teres konstruktor
+    /// Egyparameteres konstruktor
     /// C-sztringbol csinal String-et
     String(char const* str)
         : pData(new char[strlen(str) + 1])

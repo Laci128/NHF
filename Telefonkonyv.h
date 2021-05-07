@@ -8,10 +8,9 @@
 #include "String.h"
 #include "Bejegyzes.h"
 
-#ifdef _MSC_VER
-// MSC ne adjon figyelmeztető üzenetet a stringkezelő függvényekre.
+
 #define _CRT_SECURE_NO_WARNINGS
-#endif
+
 
 
 class Telefonkonyv : public Szerializal
@@ -19,7 +18,7 @@ class Telefonkonyv : public Szerializal
 private:
 	Bejegyzes *elso; ///a Telefonkonyv
 	Bejegyzes *akt;
-	Bejegyzes *utolso;
+	//Bejegyzes *utolso;
 
 public:
 	///Konstruktor

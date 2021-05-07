@@ -1,7 +1,6 @@
-#ifdef _MSC_VER
-// MSC ne adjon figyelmeztetõ üzenetet a stringkezelõ függvényekre.
+
 #define _CRT_SECURE_NO_WARNINGS
-#endif
+
 
 #include <iostream>
 #include <fstream>
@@ -79,16 +78,16 @@ int main(void)
 		std::cout << "\nHurra, az osszes teszt hibatlan!"  << std::endl;
 	*/
 
-
+#if 0
 	String test1 = "ez egy nagyon hosszu szoveg";
 		String test2 = "egy";
 
 	if (test1.contains(test2))
 		std::cout << "kurvaanyad";
+#endif
 
 
-
-	/*
+	
 	Telefonkonyv T1;
 	Telefonkonyv T2;
 
@@ -105,7 +104,7 @@ int main(void)
 	T1.kiir(irando_fajl);
 	irando_fajl.close();
 	
-	*/
+	
 
 	
 
