@@ -6,7 +6,7 @@
 #include "Szerializal.h"
 #include "String.h"
 
-class Bejegyzes : public Szerializal
+class Bejegyzes
 {
 private:
 	String vezeteknev;
@@ -24,8 +24,8 @@ public:
 	Bejegyzes* getKov() const { return kov; }
 	void setKov(Bejegyzes* kovetkezo) { kov = kovetkezo; }
 
-	//Virtualis osszehasonlito operator, hogy a leszarmazottaket megfeleloen hasznalja
-	virtual bool operator==(Bejegyzes const& rhs) = 0;
+	//Virtualis osszehasonlito operator, hogy a leszarmazottaket megfeleloen hasznalja?
+	//virtual bool operator==(Bejegyzes const& rhs) = 0;
 
 	/// Destruktor
 	virtual ~Bejegyzes() {}
@@ -33,7 +33,7 @@ public:
 
 };
 
-class Barat: public Bejegyzes {
+class Barat: public Bejegyzes, public Szerializal{
 private:
 	String becenev;
 	String privat_telszam;
@@ -79,7 +79,7 @@ public:
 
 };
 
-class Munkatars: public Bejegyzes {
+class Munkatars: public Bejegyzes, public Szerializal {
 private:
 	String munkahelyi_telszam;
 

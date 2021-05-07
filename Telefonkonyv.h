@@ -16,10 +16,8 @@ private:
 
 public:
 	///Konstruktor
-	Telefonkonyv()
-		: elso(NULL), akt(NULL)
-	{
-		akt = elso;
+	Telefonkonyv() {
+		elso = akt = new Bejegyzes;
 	}
 
 	///Masolo konstruktor
@@ -30,7 +28,9 @@ public:
 
 	///Destruktor
 	~Telefonkonyv() {
-		
+		delete elso;
+		delete akt;
+		elso = akt = NULL;
 	};
 
 	///Kitorli a torlendo Bejegyzest a Telefonkonyvbol
@@ -78,8 +78,8 @@ public:
 	}
 
 	void beolvas(std::istream& is) {
-		Bejegyzes temp;
-		akt = &temp;
+		//Bejegyzes temp;
+		//akt = &temp;
 		char c;
 		akt->beolvas(is);
 		akt = akt->getKov();
