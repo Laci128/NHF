@@ -15,12 +15,14 @@ private:
 
 public:
 	///Konstruktor
-	Bejegyzes(String const& vezetek ="", String const& kereszt ="")
+	Bejegyzes(String const& vezetek , String const& kereszt )
 		:vezeteknev(vezetek), keresztnev(kereszt), kov(NULL)
 	{}
-
-	String getVeznev() const { return vezeteknev; }
-	String getKernev() const { return keresztnev; }
+	Bejegyzes()	//
+		:vezeteknev(), keresztnev(), kov(NULL)
+	{}
+	 String getVeznev() const { return vezeteknev; }
+	 String getKernev() const { return keresztnev; }
 	Bejegyzes* getKov() const { return kov; }
 	void setKov(Bejegyzes* kovetkezo) { kov = kovetkezo; }
 	void beolvas(std::istream& is);
@@ -77,7 +79,7 @@ public:
 	}
 
 	bool find( const String ) const {
-		
+
 	}
 
 

@@ -9,24 +9,24 @@
 #include "Szerializal.h"
 
 /**
-A String osztály.
-A 'pData'-ban vannak a karakterek (a lezáró nullával együtt), 'len' a hossza.
-A hosszba nem számít bele a lezáró nulla.
+A String osztï¿½ly.
+A 'pData'-ban vannak a karakterek (a lezï¿½rï¿½ nullï¿½val egyï¿½tt), 'len' a hossza.
+A hosszba nem szï¿½mï¿½t bele a lezï¿½rï¿½ nulla.
  */
 class String : public Szerializal
 {
 private:
     char* pData;        ///< pointer az adatra
-    size_t len;         ///< hossz lezáró nulla nélkül
+    size_t len;         ///< hossz lezï¿½rï¿½ nulla nï¿½lkï¿½l
 
 public:
 
-    /// Sztring hosszát adja vissza.
-    /// @return sztring tényleges hossza (lezáró nulla nélkül).
+    /// Sztring hosszï¿½t adja vissza.
+    /// @return sztring tï¿½nyleges hossza (lezï¿½rï¿½ nulla nï¿½lkï¿½l).
     size_t size() const { return len; }
 
     /// C-sztringet ad vissza
-    /// @return pointer a tárolt, vagy azzal azonos tartalmú nullával lezárt sztring-re.
+    /// @return pointer a tï¿½rolt, vagy azzal azonos tartalmï¿½ nullï¿½val lezï¿½rt sztring-re.
     const char* c_str() const { return pData == nullptr ? "" : pData; }
 
 
@@ -46,7 +46,7 @@ public:
         pData[1] = '\0';
     }
 
-    /// Egyparaméteres konstruktor
+    /// Egyparamï¿½teres konstruktor
     /// C-sztringbol csinal String-et
     String(char const* str)
         : pData(new char[strlen(str) + 1])
@@ -104,7 +104,9 @@ public:
     }
 
 
-
+    bool contains (const String keresendo){
+        
+    }
 
 
     void kiir(std::ostream& os) const {
