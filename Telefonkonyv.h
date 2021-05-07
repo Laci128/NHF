@@ -59,14 +59,11 @@ public:
 	}*/
 
 	void kiir(std::ostream& os) const;
-
-
 	void beolvas(std::istream& is);
 
 	// megkeresi az első találatot a telefonkönyvben
 	Bejegyzes* find(const String keresendo);
-
-
+	
 	//megkeresi az összes találatot a telefonkönyben és egy újba fűzi
 	//lehet használni rajta a kiíratást
 	Telefonkonyv findAll(const String keresendo);

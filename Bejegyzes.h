@@ -21,8 +21,8 @@ public:
 	Bejegyzes()	//
 		:vezeteknev(), keresztnev(), kov(NULL)
 	{}
-	 String getVeznev() const { return vezeteknev; }
-	 String getKernev() const { return keresztnev; }
+	String getVeznev() const { return vezeteknev; }
+	String getKernev() const { return keresztnev; }
 	Bejegyzes* getKov() const { return kov; }
 	void setKov(Bejegyzes* kovetkezo) { kov = kovetkezo; }
 	void beolvas(std::istream& is);
@@ -62,6 +62,9 @@ public:
 		if (temp->becenev == adat || temp->privat_telszam == adat || temp->getVeznev() == adat || temp->getKernev() == adat)
 			return this;
 	}*/
+
+	bool find( const String ) const;
+
 
 	void kiir(std::ostream& os) const {
 		getVeznev().kiir(os);
@@ -103,6 +106,9 @@ public:
 	}
 
 	Bejegyzes* keres_munkatars(Bejegyzes* megnezendo, String const& adat);
+
+	
+	bool find( const String ) const;
 
 	
 	void kiir(std::ostream& os) const {

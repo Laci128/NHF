@@ -104,8 +104,10 @@ public:
     }
 
 
-    bool contains (const String keresendo){
-        
+    bool contains (const String keresendo) const {
+int kerLen=keresendo.size();
+const char* data=keresendo.c_str();
+
     }
 
 
