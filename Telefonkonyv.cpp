@@ -64,12 +64,12 @@ void Telefonkonyv::beolvas(std::istream& is)
 
 
 
-Bejegyzes* Telefonkonyv::find(const String keresendo)
+Bejegyzes* Telefonkonyv::keres(const String keresendo)
 {
 	Bejegyzes* tmp = elso;
 	while (tmp != nullptr)
 	{
-		if (tmp->find(keresendo))
+		if (tmp->keres(keresendo))
 			return tmp;
 	}
 }
@@ -77,13 +77,13 @@ Bejegyzes* Telefonkonyv::find(const String keresendo)
 
 //megkeresi az összes találatot a telefonkönyben és egy újba fûzi
 	//lehet használni rajta a kiíratást
-Telefonkonyv Telefonkonyv::findAll(const String keresendo)
+Telefonkonyv Telefonkonyv::keres_mind(const String keresendo)
 {
 	Bejegyzes* tmp = elso;
 	Telefonkonyv result;
 	while (tmp != nullptr)
 	{
-		if (tmp->find(keresendo))
+		if (tmp->keres(keresendo))
 			result.hozzaad(*tmp);
 	}
 	return result;

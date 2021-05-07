@@ -30,7 +30,7 @@ public:
 	void setKov(Bejegyzes* kovetkezo) { kov = kovetkezo; }
 	void beolvas(std::istream& is);
 	void kiir(std::ostream& os) const;
-	bool find( const String ) ;
+	bool keres(String const& keresendo) ;
 	//Virtualis osszehasonlito operator, hogy a leszarmazottaket megfeleloen hasznalja?
 	//virtual bool operator==(Bejegyzes const& rhs) = 0;
 
@@ -56,17 +56,7 @@ public:
 	}
 
 
-	/*
-	///Ez szerintem igy jo, de igy is generikus a kereses a Telefonkonyvben???
-	Bejegyzes* keres_barat(Bejegyzes* megnezendo, String const& adat) {
-		Barat* temp = dynamic_cast<Barat*>(megnezendo);
-		if (temp == NULL)
-			return false;
-		if (temp->becenev == adat || temp->privat_telszam == adat || temp->getVeznev() == adat || temp->getKernev() == adat)
-			return this;
-	}*/
-
-	bool find( const String ) ;
+	bool keres( String const& keresendo) ;
 
 
 	void kiir(std::ostream& os) const;
@@ -94,10 +84,9 @@ public:
 		return(this->munkahelyi_telszam == rhs.munkahelyi_telszam && this->getVeznev() == rhs.getVeznev() && this->getKernev() == rhs.getKernev());
 	}
 
-	Bejegyzes* keres_munkatars(Bejegyzes* megnezendo, String const& adat);
 
 	
-	bool find( const String ) ;
+	bool keres( String const& keresendo) ;
 
 	
 	void kiir(std::ostream& os) const;

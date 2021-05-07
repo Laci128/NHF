@@ -4,15 +4,15 @@
 
 
 
-bool Bejegyzes::find( const String keresendo) {
+bool Bejegyzes::keres( String const& keresendo) {
     return (getVeznev() == keresendo || getKernev() == keresendo);
 }
 
-bool Barat::find( const String keresendo) {
+bool Barat::keres( String const& keresendo) {
     return (getVeznev() == keresendo || getKernev() == keresendo || becenev == keresendo || privat_telszam == keresendo );
 }
 
-bool Munkatars::find( const String keresendo) {
+bool Munkatars::keres( String const& keresendo) {
     return (getVeznev() == keresendo || getKernev()==keresendo || munkahelyi_telszam == keresendo);
 }
 

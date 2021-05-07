@@ -49,29 +49,15 @@ public:
 	void hozzaad(Bejegyzes const& hozzaadando);
 	
 
-	///Kikeres egy Bejegyzest a Telefonkonyvbol egy megadott adat alapjan
-	//Nem jo???
-	//template <class Funktor>
-	//Bejegyzes* kereses(String const& adat, Funktor fun);
-	/*{
-		akt = elso;
-		while (akt != NULL)
-		{
-			fun(*akt, adat);
-			akt = akt->getKov();
-		}
-		return NULL;
-	}*/
-
 	void kiir(std::ostream& os) const;
 	void beolvas(std::istream& is);
 
 	// megkeresi az első találatot a telefonkönyvben
-	Bejegyzes* find(const String keresendo);
+	Bejegyzes* keres(const String keresendo);
 	
 	//megkeresi az összes találatot a telefonkönyben és egy újba fűzi
 	//lehet használni rajta a kiíratást
-	Telefonkonyv findAll(const String keresendo);
+	Telefonkonyv keres_mind(const String keresendo);
 
 };
 
