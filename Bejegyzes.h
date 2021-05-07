@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #ifndef BEJEGYZES_H
 #define BEJEGYZES_H
 
@@ -5,9 +7,6 @@
 
 #include "Szerializal.h"
 #include "String.h"
-
-
-#define _CRT_SECURE_NO_WARNINGS
 
 
 class Bejegyzes
@@ -31,7 +30,7 @@ public:
 	void setKov(Bejegyzes* kovetkezo) { kov = kovetkezo; }
 	void beolvas(std::istream& is);
 	void kiir(std::ostream& os) const;
-	bool find( const String ) const;
+	bool find( const String ) ;
 	//Virtualis osszehasonlito operator, hogy a leszarmazottaket megfeleloen hasznalja?
 	//virtual bool operator==(Bejegyzes const& rhs) = 0;
 
@@ -67,23 +66,12 @@ public:
 			return this;
 	}*/
 
-	bool find( const String ) const;
+	bool find( const String ) ;
 
 
-	void kiir(std::ostream& os) const {
-		getVeznev().kiir(os);
-		getKernev().kiir(os);
-		becenev.kiir(os);
-		privat_telszam.kiir(os);
+	void kiir(std::ostream& os) const;
 
-	}
-
-	void beolvas(std::istream& is) {
-		getVeznev().beolvas(is);
-		getKernev().beolvas(is);
-		becenev.beolvas(is);
-		privat_telszam.beolvas(is);
-	}
+	void beolvas(std::istream& is);
 
 
 
@@ -109,20 +97,12 @@ public:
 	Bejegyzes* keres_munkatars(Bejegyzes* megnezendo, String const& adat);
 
 	
-	bool find( const String ) const;
+	bool find( const String ) ;
 
 	
-	void kiir(std::ostream& os) const {
-		getVeznev().kiir(os);
-		getKernev().kiir(os);
-		munkahelyi_telszam.kiir(os);
-	}
+	void kiir(std::ostream& os) const;
 
-	void beolvas(std::istream& is) {
-		getVeznev().beolvas(is);
-		getKernev().beolvas(is);
-		munkahelyi_telszam.beolvas(is);
-	}
+	void beolvas(std::istream& is);
 
 	~Munkatars() {}
 

@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #ifndef TELEFONKONYV_H
 #define TELEFONKONYV_H
 
@@ -8,8 +10,6 @@
 #include "String.h"
 #include "Bejegyzes.h"
 
-
-#define _CRT_SECURE_NO_WARNINGS
 
 
 

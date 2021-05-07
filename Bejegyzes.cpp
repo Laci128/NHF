@@ -1,17 +1,57 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "Bejegyzes.h"
 
 
-#define _CRT_SECURE_NO_WARNINGS
 
-
-bool Bejegyzes::find( const String keresendo) const{
-    return (vezeteknev.contains(keresendo) || keresztnev.contains(keresendo));
+bool Bejegyzes::find( const String keresendo) {
+    return (getVeznev() == keresendo || getKernev() == keresendo);
 }
 
-bool Barat::find( const String keresendo) const{
-    return (getVeznev().contains(keresendo) || getKernev().contains(keresendo) || becenev.contains(keresendo) || privat_telszam.contains(keresendo));
+bool Barat::find( const String keresendo) {
+    return (getVeznev() == keresendo || getKernev() == keresendo || becenev == keresendo || privat_telszam == keresendo );
 }
 
-bool Munkatars::find( const String keresendo) const{
-    return (getVeznev().contains(keresendo) || getKernev().contains(keresendo) || munkahelyi_telszam.contains(keresendo));
+bool Munkatars::find( const String keresendo) {
+    return (getVeznev() == keresendo || getKernev()==keresendo || munkahelyi_telszam == keresendo);
+}
+
+
+void  Bejegyzes::beolvas(std::istream& is) {
+}
+
+
+void  Bejegyzes::kiir(std::ostream& os) const {
+
+}
+
+
+void  Barat::beolvas(std::istream& is) {
+    getVeznev().beolvas(is);
+    getKernev().beolvas(is);
+    becenev.beolvas(is);
+    privat_telszam.beolvas(is);
+}
+
+
+void  Barat::kiir(std::ostream& os) const {
+    getVeznev().kiir(os);
+    getKernev().kiir(os);
+    becenev.kiir(os);
+    privat_telszam.kiir(os);
+
+}
+
+
+void  Munkatars::beolvas(std::istream& is) {
+    getVeznev().beolvas(is);
+    getKernev().beolvas(is);
+    munkahelyi_telszam.beolvas(is);
+}
+
+
+void  Munkatars::kiir(std::ostream& os) const {
+    getVeznev().kiir(os);
+    getKernev().kiir(os);
+    munkahelyi_telszam.kiir(os);
 }

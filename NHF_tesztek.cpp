@@ -1,4 +1,7 @@
+<<<<<<< HEAD
+=======
 
+>>>>>>> 5d622f23b80a08881370bd9b9aa0898055477c0d
 #define _CRT_SECURE_NO_WARNINGS
 
 
@@ -78,6 +81,9 @@ int main(void)
 		std::cout << "\nHurra, az osszes teszt hibatlan!"  << std::endl;
 	*/
 
+<<<<<<< HEAD
+
+=======
 #if 0
 	String test1 = "ez egy nagyon hosszu szoveg";
 		String test2 = "egy";
@@ -85,6 +91,7 @@ int main(void)
 	if (test1.contains(test2))
 		std::cout << "kurvaanyad";
 #endif
+>>>>>>> 5d622f23b80a08881370bd9b9aa0898055477c0d
 
 
 	

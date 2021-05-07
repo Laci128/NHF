@@ -1,9 +1,10 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "Telefonkonyv.h"
 
 
-#define _CRT_SECURE_NO_WARNINGS
 
-
+>>>>>>> 5d622f23b80a08881370bd9b9aa0898055477c0d
 /*void Telefonkonyv::torol(Bejegyzes& torlendo) {
 		if(*elso == torlendo)
 
@@ -16,6 +17,13 @@
 		}
 
 	}*/
+
+Telefonkonyv::Telefonkonyv(Telefonkonyv const& rhs)
+{
+
+}
+
+
 
 void Telefonkonyv::hozzaad(Bejegyzes const& hozzaadando){
 	while (akt != NULL)
