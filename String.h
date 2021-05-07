@@ -8,6 +8,13 @@
 
 #include "Szerializal.h"
 
+#ifdef _MSC_VER
+// MSC ne adjon figyelmeztető üzenetet a stringkezelő függvényekre.
+#define _CRT_SECURE_NO_WARNINGS
+#endif
+
+
+
 /**
 A String oszt�ly.
 A 'pData'-ban vannak a karakterek (a lez�r� null�val egy�tt), 'len' a hossza.
@@ -108,7 +115,7 @@ public:
         int kerLen = keresendo.size();
         const char *data = keresendo.c_str();
         int kerPos = 0;
-        for (int i = 0; i < len; i++)
+        for (size_t i = 0; i < len; i++)
         {
             if (pData[i] == data[kerPos])
                 kerPos++;

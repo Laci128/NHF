@@ -35,5 +35,11 @@
     <ClCompile Include="Telefonkonyv.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Bejegyzes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="String.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
