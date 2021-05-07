@@ -9,7 +9,7 @@
 #include "String.h"
 
 
-class Bejegyzes
+class Bejegyzes : public Szerializal
 {
 private:
 	String vezeteknev;
@@ -17,20 +17,32 @@ private:
 	Bejegyzes* kov;     //pointer a kovetkezo Bejegyzesre Telefonkonyvben
 
 public:
-	///Konstruktor
+	/// Konstruktor
+	///
 	Bejegyzes(String const& vezetek , String const& kereszt )
-		:vezeteknev(vezetek), keresztnev(kereszt), kov(NULL)
+		:vezeteknev(vezetek), keresztnev(kereszt), kov(nullptr)
 	{}
-	Bejegyzes()	//
-		:vezeteknev(), keresztnev(), kov(NULL)
+
+	/// Parameter nelkuli konstruktor
+	/// 
+	Bejegyzes()
+		:vezeteknev(), keresztnev(), kov(nullptr)
 	{}
+
+
 	String getVeznev() const { return vezeteknev; }
 	String getKernev() const { return keresztnev; }
 	Bejegyzes* getKov() const { return kov; }
 	void setKov(Bejegyzes* kovetkezo) { kov = kovetkezo; }
-	void beolvas(std::istream& is);
-	void kiir(std::ostream& os) const;
-	bool keres(String const& keresendo) ;
+
+	virtual Bejegyzes const& operator=(Bejegyzes const& rhs) { return *this; }
+
+	virtual void beolvas(std::istream& is) {}
+	virtual void kiir(std::ostream& os) const {}
+
+	virtual bool keres(String const& keresendo) { return false; };
+
+
 	//Virtualis osszehasonlito operator, hogy a leszarmazottaket megfeleloen hasznalja?
 	//virtual bool operator==(Bejegyzes const& rhs) = 0;
 
@@ -40,7 +52,7 @@ public:
 
 };
 
-class Barat: public Bejegyzes, public Szerializal{
+class Barat: public Bejegyzes {
 private:
 	String becenev;
 	String privat_telszam;
@@ -54,6 +66,9 @@ public:
 	bool operator==(Barat const& rhs) {
 		return(this->becenev == rhs.becenev && this->privat_telszam == rhs.privat_telszam && this->getVeznev() == rhs.getVeznev() && this->getKernev() == rhs.getKernev());
 	}
+
+	Barat const& operator=(Barat const& rhs);
+
 
 
 	bool keres( String const& keresendo) ;
@@ -71,7 +86,7 @@ public:
 
 };
 
-class Munkatars: public Bejegyzes, public Szerializal {
+class Munkatars: public Bejegyzes{
 private:
 	String munkahelyi_telszam;
 
@@ -84,6 +99,7 @@ public:
 		return(this->munkahelyi_telszam == rhs.munkahelyi_telszam && this->getVeznev() == rhs.getVeznev() && this->getKernev() == rhs.getKernev());
 	}
 
+	Munkatars const& operator=(Munkatars const& rhs);
 
 	
 	bool keres( String const& keresendo) ;

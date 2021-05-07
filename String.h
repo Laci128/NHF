@@ -13,11 +13,10 @@
 
 
 
-/**
-A String osztaly.
-A 'pData'-ban vannak a karakterek (a lezaro nullaval egyutt), 'len' a hossza.
-A hosszba nem szamit bele a lezaro nulla.
- */
+
+///A String osztaly.
+///A 'pData'-ban vannak a karakterek (a lezaro nullaval egyutt), 'len' a hossza.
+///A hosszba nem szamit bele a lezaro nulla.
 class String : public Szerializal
 {
 private:
@@ -35,14 +34,15 @@ public:
     const char* c_str() const { return pData == nullptr ? "" : pData; }
 
 
-    /// Parameter nelkuli konstruktor:
+    /// Parameter nelkuli konstruktor
+    /// 
     String() 
         : pData(nullptr)
         , len(0)
     {}
 
-    ///Egyparameteres konstruktor, egyben konverzios konstruktor
-    ///Egyetlen karakterbol csinal String-et
+    /// Egyparameteres konstruktor, egyben konverzios konstruktor
+    /// Egyetlen karakterbol csinal String-et
     String(char c)
         : pData(new char[2])
         , len(1)
@@ -63,14 +63,16 @@ public:
 
     //RULE OF THREE
 
-    ///Masolo konstruktor
+    /// Masolo konstruktor
+    /// 
     String(String const& rhs)
         : pData(nullptr)
     {
         *this = rhs;
     }
 
-    ///Ertekado operator
+    /// = operator:
+    /// Ertekado operator
     String const& operator=(String const& rhs) {
         if (this == &rhs)
             return rhs;
@@ -82,14 +84,19 @@ public:
         return *this;
     }
 
-    ///Destruktor
+    /// Destruktor
+    /// 
     ~String() {
         delete[] pData;
     }
 
     //RULE OF THREE
 
-    ///+ operator: String-hez String-et ad
+
+
+    /// + operator:
+    /// Stringhez Stringet ad
+    /// @return atmeneti String, amiben az osszeadott Stringek vegeredmenye van
     String operator+(String const& rhs) const {
         String res;
         res.len = size() + rhs.size();
@@ -100,20 +107,25 @@ public:
     }
 
 
-    ///+ operator: Stringhez jobbrol ad hozza karaktert
+    /// + operator:
+    /// Stringhez jobbrol ad hozza karaktert
     String operator+(char rhs_c) const { return *this + String(rhs_c); }
 
-    ///== operator
+    /// == operator:
+    /// Ket Stringet hasonlit ossze
     bool operator==(String const& rhs) {
         return (strcmp(pData, rhs.pData) == 0);
     }
 
-
+    /// A String streamre kiiro fuggvenye
+    /// 
     void kiir(std::ostream& os) const {
         os.write(pData, len);
         os << '\t';
     }
 
+    /// A String streamrol beolvaso fuggvenye
+    /// 
     void beolvas(std::istream& is) {
         *this = "";
         char c;

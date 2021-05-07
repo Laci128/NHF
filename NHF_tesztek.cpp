@@ -84,11 +84,14 @@ int main(void)
 	Telefonkonyv T1;
 	Telefonkonyv T2;
 
-
+	
 	std::ifstream olvasott_fajl;
 	olvasott_fajl.open("Test_beolvas.txt");
 	T1.beolvas(olvasott_fajl);
 	olvasott_fajl.close();
+
+
+	
 
 	T1.kiir(std::cout);
 	

@@ -16,48 +16,50 @@
 class Telefonkonyv : public Szerializal
 {
 private:
-	Bejegyzes *elso; ///a Telefonkonyv
+	Bejegyzes *elso; ///<
 	Bejegyzes *akt;
-	//Bejegyzes *utolso;
+	size_t db;
 
 public:
 	///Konstruktor
 	Telefonkonyv()
-	{
-		elso = akt = new Bejegyzes;
+	{	
+		db = 0;
+		elso = akt = nullptr;
 	}
 
 	///Masolo konstruktor
-	Telefonkonyv(Telefonkonyv const &rhs);
+	Telefonkonyv(Telefonkonyv const& rhs) { *this = rhs; }
 
 	///Ertekado operator
-	Telefonkonyv const &operator=(Telefonkonyv const &rhs);
+	Telefonkonyv const& operator=(Telefonkonyv const& rhs);
+	
 
 	///Destruktor
 	~Telefonkonyv()
 	{
 		delete elso;
 		delete akt;
-		elso = akt = NULL;
+		elso = akt = nullptr;
 	};
 
 	///Kitorli a torlendo Bejegyzest a Telefonkonyvbol
-	void torol(Bejegyzes &torlendo);
+	void torol(Bejegyzes const& torlendo);
 		
 
 	///Hozzaadja a hozzaadando Bejegyzest a Telefonkonyvbe
-	void hozzaad(Bejegyzes const& hozzaadando);
+	void hozzaad(Bejegyzes& hozzaadando);
 	
 
 	void kiir(std::ostream& os) const;
 	void beolvas(std::istream& is);
 
 	// megkeresi az első találatot a telefonkönyvben
-	Bejegyzes* keres(const String keresendo);
+	Bejegyzes* keres(String const& keresendo);
 	
 	//megkeresi az összes találatot a telefonkönyben és egy újba fűzi
 	//lehet használni rajta a kiíratást
-	Telefonkonyv keres_mind(const String keresendo);
+	Telefonkonyv keres_mind(String const& keresendo);
 
 };
 
