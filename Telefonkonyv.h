@@ -11,25 +11,26 @@
 class Telefonkonyv : public Szerializal
 {
 private:
-	Bejegyzes* elso;           ///a Telefonkonyv 
-	Bejegyzes* akt;
-	Bejegyzes* utolso;
-
+	Bejegyzes *elso; ///a Telefonkonyv
+	Bejegyzes *akt;
+	Bejegyzes *utolso;
 
 public:
 	///Konstruktor
-	Telefonkonyv() {
+	Telefonkonyv()
+	{
 		elso = akt = new Bejegyzes;
 	}
 
 	///Masolo konstruktor
-	Telefonkonyv(Telefonkonyv const& rhs);
+	Telefonkonyv(Telefonkonyv const &rhs);
 
 	///Ertekado operator
-	Telefonkonyv const& operator=(Telefonkonyv const& rhs);
+	Telefonkonyv const &operator=(Telefonkonyv const &rhs);
 
 	///Destruktor
-	~Telefonkonyv() {
+	~Telefonkonyv()
+	{
 		delete elso;
 		delete akt;
 		elso = akt = NULL;
@@ -37,7 +38,7 @@ public:
 
 	///Kitorli a torlendo Bejegyzest a Telefonkonyvbol
 	///**Felbehagytam**
-	void torol(Bejegyzes& torlendo);/* {
+	void torol(Bejegyzes &torlendo); /* {
 		if(*elso == torlendo)
 		
 		
@@ -50,36 +51,42 @@ public:
 
 	}*/
 
-	///Hozzaadja a hozzaadando Bejegyzest a Telefonkonyvbe  
-	void hozzaad(Bejegyzes const& hozzaadando) {
-		while (akt != NULL){
+	///Hozzaadja a hozzaadando Bejegyzest a Telefonkonyvbe
+	void hozzaad(Bejegyzes const &hozzaadando)
+	{
+		while (akt != NULL)
+		{
 			akt = akt->getKov();
 		}
 		*akt = hozzaadando;
 	}
-	
+
 	///Kikeres egy Bejegyzest a Telefonkonyvbol egy megadott adat alapjan
-	
+
 	template <class Funktor>
-	Bejegyzes* kereses(String const& adat, Funktor fun) {
+	Bejegyzes *kereses(String const &adat, Funktor fun)
+	{
 		akt = elso;
-		while (akt != NULL) {
+		while (akt != NULL)
+		{
 			fun(*akt, adat);
 			akt = akt->getKov();
 		}
 		return NULL;
 	}
-	
 
-	void kiir(std::ostream& os) const {
-		Bejegyzes* mozgo = elso;
-		while (mozgo != NULL) {
+	void kiir(std::ostream &os) const
+	{
+		Bejegyzes *mozgo = elso;
+		while (mozgo != NULL)
+		{
 			mozgo->kiir(os);
 			os << '\n';
 		}
 	}
 
-	void beolvas(std::istream& is) {
+	void beolvas(std::istream &is)
+	{
 		//Bejegyzes temp;
 		//akt = &temp;
 		char c;
@@ -96,12 +103,31 @@ public:
 		akt->setKov(NULL);
 	}
 
+	// megkeresi az első találatot a atelefonkönyvben
+	Bejegyzes *find(const String keresendo)
+	{
+		Bejegyzes *tmp = elso;
+		while (tmp != nullptr)
+		{
+			if (tmp->find(keresendo))
+				return tmp;
+		}
+	}
+
+	//megkeresi az összes találatot a telefonkönyben és egy újba fűzi
+	//lehet használni rajta a kiíratást
+	Telefonkonyv findAll(const String keresendo)
+	{
+		Bejegyzes *tmp = elso;
+		Telefonkonyv result;
+		while (tmp != nullptr)
+		{
+			if (tmp->find(keresendo))
+				result.hozzaad(*tmp);
+		}
+		return result;
+	}
 };
-
-
-
-
 
 #endif
 
-//te szennyl�da szar

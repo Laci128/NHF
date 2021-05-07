@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "algorithm": "cpp",
+        "cmath": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "xlocale": "cpp",
+        "xlocnum": "cpp",
+        "xstring": "cpp",
+        "xutility": "cpp"
+    }
+}

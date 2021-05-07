@@ -15,7 +15,7 @@ private:
 
 public:
 	///Konstruktor
-	Bejegyzes(String const& vezetek, String const& kereszt)
+	Bejegyzes(String const& vezetek ="", String const& kereszt ="")
 		:vezeteknev(vezetek), keresztnev(kereszt), kov(NULL)
 	{}
 
@@ -25,6 +25,7 @@ public:
 	void setKov(Bejegyzes* kovetkezo) { kov = kovetkezo; }
 	void beolvas(std::istream& is);
 	void kiir(std::ostream& os) const;
+	bool find( const String ) const;
 	//Virtualis osszehasonlito operator, hogy a leszarmazottaket megfeleloen hasznalja?
 	//virtual bool operator==(Bejegyzes const& rhs) = 0;
 
@@ -74,6 +75,12 @@ public:
 		becenev.beolvas(is);
 		privat_telszam.beolvas(is);
 	}
+
+	bool find( const String ) const {
+		
+	}
+
+
 
 	~Barat() {}
 
