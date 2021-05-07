@@ -13,6 +13,8 @@ class Telefonkonyv : public Szerializal
 private:
 	Bejegyzes* elso;           ///a Telefonkonyv 
 	Bejegyzes* akt;
+	Bejegyzes* utolso;
+
 
 public:
 	///Konstruktor
@@ -102,3 +104,4 @@ public:
 
 #endif
 
+//te szennyláda szar
