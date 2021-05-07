@@ -23,7 +23,8 @@ public:
 	String getKernev() const { return keresztnev; }
 	Bejegyzes* getKov() const { return kov; }
 	void setKov(Bejegyzes* kovetkezo) { kov = kovetkezo; }
-
+	void beolvas(std::istream& is);
+	void kiir(std::ostream& os) const;
 	//Virtualis osszehasonlito operator, hogy a leszarmazottaket megfeleloen hasznalja?
 	//virtual bool operator==(Bejegyzes const& rhs) = 0;
 
