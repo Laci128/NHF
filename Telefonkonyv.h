@@ -18,13 +18,11 @@ class Telefonkonyv : public Szerializal
 private:
 	Bejegyzes *elso; ///<
 	Bejegyzes *akt;
-	size_t db;
 
 public:
 	///Konstruktor
 	Telefonkonyv()
 	{	
-		db = 0;
 		elso = akt = nullptr;
 	}
 
@@ -53,6 +51,7 @@ public:
 
 	void kiir(std::ostream& os) const;
 	void beolvas(std::istream& is);
+
 
 	// megkeresi az első találatot a telefonkönyvben
 	Bejegyzes* keres(String const& keresendo);

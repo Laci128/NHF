@@ -60,35 +60,60 @@ void Telefonkonyv::kiir(std::ostream& os) const
 	}
 }
 
-//***
-//***
-//***
-//HOW TO F*CK DO I DO THIS PIECE OF.....
-//***
-//***
-//***
-void Telefonkonyv::beolvas(std::istream& is)
-{
 
+
+void Telefonkonyv::beolvas(std::istream& is){
+	Bejegyzes uj;
+	String temp;
+	String temp2;
+	char space;
 	char c;
-	Munkatars temp;
-	akt = &temp;
+	char fajl_vege_e;
 
-	akt->beolvas(is);
-	akt = akt->getKov();
-	is >> c;
-	elso = akt;
-	while (c != EOF)
-	{	
-		if (c != '\n') {
-			akt = &temp;
-			akt->beolvas(is);
+	while (is >> c && is >> fajl_vege_e) {
+		is.putback(fajl_vege_e);
+		is.putback(c);
+		uj.beolvas(is);
+		temp.beolvas(is);
+		is >> space;
+		is >> c;
+		if (c == '\n') {
+			Munkatars ujMunkatars(uj.getVeznev(), uj.getKernev(), temp);
+			ujMunkatars.setKov(nullptr);
+			akt = &ujMunkatars;
+			if (elso == nullptr)
+				elso = akt;
 			akt = akt->getKov();
-			is >> c;
+			is.putback(space);
 		}
+		else {
+			is.putback(c);
+			temp2.beolvas(is);
+			Barat ujBarat(uj.getVeznev(), uj.getKernev(), temp, temp2);
+			ujBarat.setKov(nullptr);
+			akt = &ujBarat;
+			if (elso == nullptr) {
+				elso = akt;
+				elso->kiir(std::cout);
+				std::cout << std::endl;
+			}
+			akt = akt->getKov();
+			
+			elso->kiir(std::cout);
+			std::cout << std::endl;
+			std::cout << "Itt meg jo Barat" << std::endl;
+		}
+		is >> space;
 
-	}
-	akt->setKov(nullptr);
+		
+		elso->kiir(std::cout);
+		std::cout << std::endl; 
+		std::cout << "Itt meg jo" <<std::endl;
+
+	} 
+
+	elso->kiir(std::cout);
+
 }
 
 

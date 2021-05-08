@@ -41,7 +41,7 @@ public:
 
 	virtual Bejegyzes const& operator=(Bejegyzes const& rhs) { return *this; }
 
-	virtual void beolvas(std::istream& is) {}
+	void beolvas(std::istream& is);
 	virtual void kiir(std::ostream& os) const {}
 
 	virtual bool keres(String const& keresendo) { return false; };
@@ -80,9 +80,7 @@ public:
 
 	void kiir(std::ostream& os) const;
 
-	void beolvas(std::istream& is);
-
-
+	//void beolvas(std::istream& is);
 
 
 	~Barat() {}
@@ -96,11 +94,10 @@ private:
 
 public:
 
-	Munkatars() :munkahelyi_telszam() { String ures; setVeznev(ures); setKernev(ures); }
-
 	Munkatars(String const& vezetek, String const& kereszt, String const& munk_tel)
 		:Bejegyzes(vezetek, kereszt), munkahelyi_telszam(munk_tel)
 	{}
+
 
 	bool operator==(Munkatars const& rhs) {
 		return(this->munkahelyi_telszam == rhs.munkahelyi_telszam && this->getVeznev() == rhs.getVeznev() && this->getKernev() == rhs.getKernev());
@@ -114,7 +111,7 @@ public:
 	
 	void kiir(std::ostream& os) const;
 
-	void beolvas(std::istream& is);
+	//void beolvas(std::istream& is);
 
 	~Munkatars() {}
 
