@@ -110,7 +110,7 @@ public:
 	
 	void kiir(std::ostream& os) const;
 
-	void beolvas(std::istream& is);
+	//void beolvas(std::istream& is);
 
 	~Munkatars() {}
 
