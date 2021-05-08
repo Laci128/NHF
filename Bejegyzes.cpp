@@ -11,17 +11,6 @@ bool Munkatars::keres( String const& keresendo) {
     return (getVeznev() == keresendo || getKernev()==keresendo || munkahelyi_telszam == keresendo);
 }
 
-#if 0 //Kuka
-void  Bejegyzes::beolvas(std::istream& is) {
-
-    vezeteknev.beolvas(is);
-    keresztnev.beolvas(is);
-}
-#endif
-/*
-void  Bejegyzes::kiir(std::ostream& os) const {
-
-}*/
 
 
 Barat const& Barat::operator=(Barat const& rhs) {
@@ -54,7 +43,6 @@ Munkatars const& Munkatars::operator=(Munkatars const& rhs) {
 
 
 void Barat::beolvas(std::istream& is) {
-    
     getVeznev().beolvas(is);
     getKernev().beolvas(is);
     privat_telszam.beolvas(is);
@@ -76,6 +64,7 @@ void Munkatars::beolvas(std::istream& is) {
     getKernev().beolvas(is);
     munkahelyi_telszam.beolvas(is);
 }
+
 
 
 

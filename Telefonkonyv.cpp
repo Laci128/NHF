@@ -50,7 +50,7 @@ void Telefonkonyv::hozzaad(Bejegyzes& hozzaadando){
 
 
 	akt = elso;
-	while (akt->getKov() != nullptr) //<elmegyünk az utolso elemig
+	while (akt->getKov() != nullptr) //<elmegyunk az utolso elemig
 	{
 		akt = akt->getKov();
 	}
@@ -133,8 +133,8 @@ Bejegyzes* Telefonkonyv::keres(String const& keresendo, Funktor fun)
 }
 
 
-//megkeresi az összes találatot a telefonkönyben és egy újba fûzi
-	//lehet használni rajta a kiíratást
+//megkeresi az osszes talalatot a telefonkonyvben es egy ujba fuzi
+	//lehet hasznalni rajta a kiiratast
 Telefonkonyv Telefonkonyv::keres_mind(String const& keresendo)
 {
 	Bejegyzes* tmp = elso;

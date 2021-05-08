@@ -74,7 +74,6 @@ public:
 	Barat const& operator=(Barat const& rhs);
 
 
-
 	bool keres( String const& keresendo) ;
 
 
