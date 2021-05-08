@@ -82,9 +82,7 @@ int main(void)
 
 	
 	Telefonkonyv T1;
-	Telefonkonyv T2;
 
-	
 	std::ifstream olvasott_fajl;
 	olvasott_fajl.open("Test_beolvas.txt");
 	T1.beolvas(olvasott_fajl);
@@ -102,7 +100,34 @@ int main(void)
 	
 	
 
+#if 0
+	Telefonkonyv T2;
 	
+	String vez1 = "Meszaros";
+	String ker1 = "Laszlo";
+	String nick1 = "Laci";
+	String privtel1 = "06301234567";
+
+	String vez2 = "Kis";
+	String ker2 = "Janos";
+	String nick2 = "Jancsi";
+	String privtel2 = "06309876541";
+
+	String vez3 = "Szabo";
+	String ker3 = "Tibor";
+	String munktel1 = "06201548236";
+
+	Barat Laci(vez1, ker1, nick1, privtel1) ;
+	Barat Jancsi(vez2, ker2, nick2, privtel2);
+	Munkatars Szabo(vez3, ker3, munktel1);
+
+	T2.hozzaad(Laci);
+	T2.hozzaad(Szabo);
+	T2.hozzaad(Jancsi);
+
+	T2.kiir(std::cout);
+
+#endif
 
 	return 0;
 }

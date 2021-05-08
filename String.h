@@ -11,9 +11,6 @@
 
 
 
-
-
-
 ///A String osztaly.
 ///A 'pData'-ban vannak a karakterek (a lezaro nullaval egyutt), 'len' a hossza.
 ///A hosszba nem szamit bele a lezaro nulla.
@@ -73,9 +70,9 @@ public:
 
     /// = operator:
     /// Ertekado operator
-    String const& operator=(String const& rhs) {
+    String& operator=(String const& rhs) {
         if (this == &rhs)
-            return rhs;
+            return *this;
 
         delete[] pData;
         len = rhs.len;
@@ -121,19 +118,34 @@ public:
     /// 
     void kiir(std::ostream& os) const {
         os.write(pData, len);
-        os << '\t';
+        os << ' ';
     }
 
     /// A String streamrol beolvaso fuggvenye
     /// 
     void beolvas(std::istream& is) {
-        *this = "";
+        /**this = "";
         char c;
         is >> c;
         while (c != '\t')
         {
             *this = *this + c;
             is >> c;
+        }*/
+        *this = "";
+        char c;
+        is >> std::skipws >> c;
+        *this = *this + c;
+        while (true) {
+            c = is.peek();
+            if (c == EOF) {
+                is >> c;
+                break;
+            }
+            if (isspace(c))
+                break;
+            is >> std::noskipws >> c;
+            *this = *this + c;
         }
 
     }

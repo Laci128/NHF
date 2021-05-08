@@ -37,15 +37,25 @@ Telefonkonyv const& Telefonkonyv::operator=(Telefonkonyv const& rhs) {
 
 
 void Telefonkonyv::hozzaad(Bejegyzes& hozzaadando){
-	if (elso == nullptr)
+	if (elso == nullptr) {
 		elso = &hozzaadando;
-	
-	while (akt != nullptr)
+		return;
+	}
+
+	/*akt = elso;
+	while (akt != nullptr) {
+		if (*akt == hozzaadando)
+			throw "Ez a bejegyzes mar benne van a telefonkonyvben!";
+	}*/
+
+
+	akt = elso;
+	while (akt->getKov() != nullptr) //<elmegyünk az utolso elemig
 	{
 		akt = akt->getKov();
 	}
 
-	akt = &hozzaadando;
+	akt->setKov(&hozzaadando);
 
 }
 
@@ -57,44 +67,61 @@ void Telefonkonyv::kiir(std::ostream& os) const
 	{
 		mozgo->kiir(os);
 		os << '\n';
+		mozgo = mozgo->getKov();
 	}
 }
 
-//***
-//***
-//***
-//HOW TO F*CK DO I DO THIS PIECE OF.....
-//***
-//***
-//***
-void Telefonkonyv::beolvas(std::istream& is)
-{
 
+
+void Telefonkonyv::beolvas(std::istream& is){
+	String veznev;
+	String kernev;
+	String temp;
+	String temp2;
+	char space;
 	char c;
-	Munkatars temp;
-	akt = &temp;
+	char fajl_vege_e;
 
-	akt->beolvas(is);
-	akt = akt->getKov();
-	is >> c;
-	elso = akt;
-	while (c != EOF)
-	{	
-		if (c != '\n') {
-			akt = &temp;
-			akt->beolvas(is);
+	while (is >> c && is >> fajl_vege_e) {
+		is.putback(fajl_vege_e);
+		is.putback(c);
+		veznev.beolvas(is);
+		kernev.beolvas(is);
+		temp.beolvas(is);
+		is >> space;
+		is >> c;
+		if (c == '\n') {
+			Munkatars ujMunkatars(veznev, kernev, temp);
+			ujMunkatars.setKov(nullptr);
+			akt = &ujMunkatars;
+			if (elso == nullptr)
+				elso = akt;
 			akt = akt->getKov();
-			is >> c;
+			is.putback(space);
 		}
+		else {
+			is.putback(c);
+			temp2.beolvas(is);
+			Barat ujBarat(veznev, kernev, temp, temp2);
+			ujBarat.setKov(nullptr);
+			akt = &ujBarat;
+			if (elso == nullptr) {
+				elso = akt;
 
-	}
-	akt->setKov(nullptr);
+			}
+			akt = akt->getKov();
+	
+		}
+		is >> space;
+
+	} 
+
 }
 
 
 
-
-Bejegyzes* Telefonkonyv::keres(String const& keresendo)
+template<class Funktor>
+Bejegyzes* Telefonkonyv::keres(String const& keresendo, Funktor fun)
 {
 	Bejegyzes* tmp = elso;
 	while (tmp != nullptr)

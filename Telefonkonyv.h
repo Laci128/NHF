@@ -18,13 +18,11 @@ class Telefonkonyv : public Szerializal
 private:
 	Bejegyzes *elso; ///<
 	Bejegyzes *akt;
-	size_t db;
 
 public:
 	///Konstruktor
 	Telefonkonyv()
 	{	
-		db = 0;
 		elso = akt = nullptr;
 	}
 
@@ -38,10 +36,11 @@ public:
 	///Destruktor
 	~Telefonkonyv()
 	{
-		delete elso;
+/*		delete elso;
 		delete akt;
-		elso = akt = nullptr;
+		elso = akt = nullptr;*/
 	};
+
 
 	///Kitorli a torlendo Bejegyzest a Telefonkonyvbol
 	void torol(Bejegyzes const& torlendo);
@@ -54,8 +53,10 @@ public:
 	void kiir(std::ostream& os) const;
 	void beolvas(std::istream& is);
 
+
 	// megkeresi az első találatot a telefonkönyvben
-	Bejegyzes* keres(String const& keresendo);
+	template<class Funktor>
+	Bejegyzes* keres(String const& keresendo, Funktor fun);
 	
 	//megkeresi az összes találatot a telefonkönyben és egy újba fűzi
 	//lehet használni rajta a kiíratást

@@ -32,19 +32,19 @@ public:
 
 	String getVeznev() const { return vezeteknev; }
 	void setVeznev(String const& vez) { vezeteknev = vez; }
+
 	String getKernev() const { return keresztnev; }
 	void setKernev(String const& ker) { keresztnev = ker; }
-
 
 	Bejegyzes* getKov() const { return kov; }
 	void setKov(Bejegyzes* kovetkezo) { kov = kovetkezo; }
 
 	virtual Bejegyzes const& operator=(Bejegyzes const& rhs) { return *this; }
 
-	virtual void beolvas(std::istream& is) {}
-	virtual void kiir(std::ostream& os) const {}
+	virtual void beolvas(std::istream& is) = 0;
+	virtual void kiir(std::ostream& os) const = 0;
 
-	virtual bool keres(String const& keresendo) { return false; };
+	virtual bool keres(String const& keresendo) = 0;
 
 
 	//Virtualis osszehasonlito operator, hogy a leszarmazottaket megfeleloen hasznalja?
@@ -56,7 +56,7 @@ public:
 
 };
 
-class Barat: public Bejegyzes {
+class Barat: public Bejegyzes, public Szerializal {
 private:
 	String becenev;
 	String privat_telszam;
@@ -83,24 +83,21 @@ public:
 	void beolvas(std::istream& is);
 
 
-
-
 	~Barat() {}
 
 
 };
 
-class Munkatars: public Bejegyzes{
+class Munkatars: public Bejegyzes, public Szerializal {
 private:
 	String munkahelyi_telszam;
 
 public:
 
-	Munkatars() :munkahelyi_telszam() { String ures; setVeznev(ures); setKernev(ures); }
-
 	Munkatars(String const& vezetek, String const& kereszt, String const& munk_tel)
 		:Bejegyzes(vezetek, kereszt), munkahelyi_telszam(munk_tel)
 	{}
+
 
 	bool operator==(Munkatars const& rhs) {
 		return(this->munkahelyi_telszam == rhs.munkahelyi_telszam && this->getVeznev() == rhs.getVeznev() && this->getKernev() == rhs.getKernev());
