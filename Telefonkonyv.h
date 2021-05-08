@@ -43,7 +43,7 @@ public:
 
 
 	///Kitorli a torlendo Bejegyzest a Telefonkonyvbol
-	void torol(Bejegyzes const& torlendo);
+	void torol(Bejegyzes& torlendo);
 		
 
 	///Hozzaadja a hozzaadando Bejegyzest a Telefonkonyvbe

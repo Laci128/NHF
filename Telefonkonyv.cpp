@@ -5,34 +5,37 @@
 Telefonkonyv const& Telefonkonyv::operator=(Telefonkonyv const& rhs) {
 
 	Bejegyzes* mozgo = rhs.elso;
-	this->akt = this->elso = rhs.elso;
+	akt = elso = rhs.elso;
 
-	this->akt = this->akt->getKov();
+	akt = akt->getKov();
 	mozgo = mozgo->getKov();
 
 	while (mozgo != nullptr) {
-		this->akt = mozgo;
+		akt = mozgo;
 
-		this->akt = this->akt->getKov();
+		akt = akt->getKov();
 		mozgo = mozgo->getKov();
 	}
 
 	return *this;
 }
 
-/*void Telefonkonyv::torol(Bejegyzes const& torlendo) {
-		if(*elso == torlendo)
+///Keresesbol kellene megoldani
+///Munkatars vagy Barat
+void Telefonkonyv::torol(Bejegyzes& torlendo) {
+	/*Bejegyzes* temp = &torlendo;
+	
+	if (*elso == *temp) {
+		
+	}
 
-
-
-		akt = elso;
-		Bejegyzes* lemarado = elso;
-		while (!(*akt == torlendo)) {
+	akt = elso;
+	Bejegyzes* lemarado = elso;
+	while (!(*akt == torlendo)) {
 			akt = akt->getKov();
-		}
+		}*/
 
-	}*/
-
+	}
 
 
 
@@ -71,8 +74,8 @@ void Telefonkonyv::kiir(std::ostream& os) const
 	}
 }
 
-
-
+/*
+//A verzio
 void Telefonkonyv::beolvas(std::istream& is){
 	String veznev;
 	String kernev;
@@ -91,24 +94,28 @@ void Telefonkonyv::beolvas(std::istream& is){
 		is >> space;
 		is >> c;
 		if (c == '\n') {
-			Munkatars ujMunkatars(veznev, kernev, temp);
-			ujMunkatars.setKov(nullptr);
-			akt = &ujMunkatars;
+			akt = new Munkatars(veznev, kernev, temp);
+
 			if (elso == nullptr)
 				elso = akt;
+			else {
+				akt->setKov(akt);
+			}
 			akt = akt->getKov();
 			is.putback(space);
 		}
 		else {
 			is.putback(c);
 			temp2.beolvas(is);
-			Barat ujBarat(veznev, kernev, temp, temp2);
-			ujBarat.setKov(nullptr);
-			akt = &ujBarat;
-			if (elso == nullptr) {
-				elso = akt;
+			
+			akt = new Barat(veznev, kernev, temp, temp2);
 
+			if (elso == nullptr)
+				elso = akt;
+			else {
+				akt->setKov(akt);
 			}
+
 			akt = akt->getKov();
 	
 		}
@@ -116,8 +123,62 @@ void Telefonkonyv::beolvas(std::istream& is){
 
 	} 
 
-}
+}*/
 
+//B verzio
+void Telefonkonyv::beolvas(std::istream& is) {
+	String veznev;
+	String kernev;
+	String temp;
+	String temp2;
+	char space;
+	char c;
+	char fajl_vege_e;
+
+	while (is >> c && is >> fajl_vege_e) {
+		is.putback(fajl_vege_e);
+		is.putback(c);
+		veznev.beolvas(is);
+		kernev.beolvas(is);
+		temp.beolvas(is);
+		is >> space;
+		is >> c;
+		if (c == '\n') {
+			akt = new Munkatars(veznev, kernev, temp);
+
+			if (elso == nullptr)
+				elso = akt;
+			else {
+				Bejegyzes* mozgo = elso;
+				while (mozgo->getKov() != nullptr)
+					mozgo = mozgo->getKov();
+				mozgo->setKov(akt);
+			}
+			akt = akt->getKov();
+			is.putback(space);
+		}
+		else {
+			is.putback(c);
+			temp2.beolvas(is);
+
+			akt = new Barat(veznev, kernev, temp, temp2);
+			if (elso == nullptr) 
+				elso = akt;
+			else {
+				Bejegyzes* mozgo = elso;
+				while (mozgo->getKov() != nullptr)
+					mozgo = mozgo->getKov();
+				mozgo->setKov(akt);
+			}
+			
+			akt = akt->getKov();
+
+		}
+		is >> space;
+
+	}
+
+}
 
 
 template<class Funktor>

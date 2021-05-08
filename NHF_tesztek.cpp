@@ -80,7 +80,7 @@ int main(void)
 
 
 
-	
+//#if 0
 	Telefonkonyv T1;
 
 	std::ifstream olvasott_fajl;
@@ -98,7 +98,7 @@ int main(void)
 	T1.kiir(irando_fajl);
 	irando_fajl.close();
 	
-	
+//#endif
 
 #if 0
 	Telefonkonyv T2;

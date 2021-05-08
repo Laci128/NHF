@@ -30,6 +30,10 @@ public:
 	{}
 
 
+	//Osszehasonlito operator, hogy a leszarmazottaket megfeleloen hasznalja(?)
+	bool operator==(Bejegyzes const& rhs);
+
+
 	String getVeznev() const { return vezeteknev; }
 	void setVeznev(String const& vez) { vezeteknev = vez; }
 
@@ -47,8 +51,7 @@ public:
 	virtual bool keres(String const& keresendo) = 0;
 
 
-	//Virtualis osszehasonlito operator, hogy a leszarmazottaket megfeleloen hasznalja?
-	//virtual bool operator==(Bejegyzes const& rhs) = 0;
+	
 
 	/// Destruktor
 	virtual ~Bejegyzes() {}
