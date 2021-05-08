@@ -31,7 +31,11 @@ public:
 
 
 	String getVeznev() const { return vezeteknev; }
+	void setVeznev(String const& vez) { vezeteknev = vez; }
 	String getKernev() const { return keresztnev; }
+	void setKernev(String const& ker) { keresztnev = ker; }
+
+
 	Bejegyzes* getKov() const { return kov; }
 	void setKov(Bejegyzes* kovetkezo) { kov = kovetkezo; }
 
@@ -91,6 +95,9 @@ private:
 	String munkahelyi_telszam;
 
 public:
+
+	Munkatars() :munkahelyi_telszam() { String ures; setVeznev(ures); setKernev(ures); }
+
 	Munkatars(String const& vezetek, String const& kereszt, String const& munk_tel)
 		:Bejegyzes(vezetek, kereszt), munkahelyi_telszam(munk_tel)
 	{}

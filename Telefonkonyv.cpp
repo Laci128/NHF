@@ -71,19 +71,22 @@ void Telefonkonyv::beolvas(std::istream& is)
 {
 
 	char c;
-	Bejegyzes temp;
+	Munkatars temp;
 	akt = &temp;
 
 	akt->beolvas(is);
 	akt = akt->getKov();
 	is >> c;
 	elso = akt;
-	while (c != EOF && c == '\n')
-	{
-		akt = &temp;
-		akt->beolvas(is);
-		akt = akt->getKov();
-		is >> c;
+	while (c != EOF)
+	{	
+		if (c != '\n') {
+			akt = &temp;
+			akt->beolvas(is);
+			akt = akt->getKov();
+			is >> c;
+		}
+
 	}
 	akt->setKov(nullptr);
 }
