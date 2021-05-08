@@ -9,7 +9,7 @@
 #include "String.h"
 
 
-class Bejegyzes : public Szerializal
+class Bejegyzes 
 {
 private:
 	String vezeteknev;
@@ -110,7 +110,7 @@ public:
 	
 	void kiir(std::ostream& os) const;
 
-	//void beolvas(std::istream& is);
+	void beolvas(std::istream& is);
 
 	~Munkatars() {}
 

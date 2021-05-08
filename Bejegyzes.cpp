@@ -64,7 +64,7 @@ void Munkatars::beolvas(std::istream& is) {
     getKernev().beolvas(is);
     munkahelyi_telszam.beolvas(is);
 }
-*/
+
 
 
 
