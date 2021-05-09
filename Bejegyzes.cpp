@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "Bejegyzes.h"
+#include "memtrace.h"
 
 //Bejegyzes& operator=
 /*
@@ -23,11 +24,6 @@ Bejegyzes& Bejegyzes::operator=(Bejegyzes const& rhs) {
 
 //------------------------------------Barat------------------------------------
 
-bool Barat::keres( String const& keresendo) {
-    return (getVeznev() == keresendo || getKernev() == keresendo || becenev == keresendo || privat_telszam == keresendo);
-}
-
-
 bool Barat::operator==(Barat const& rhs) {
     return(becenev == rhs.becenev && privat_telszam == rhs.privat_telszam && getVeznev() == rhs.getVeznev() && getKernev() == rhs.getKernev());
 }
@@ -40,7 +36,6 @@ bool Barat::operator==(Bejegyzes const& rhs) {
     else
         return false;
 }
-
 
 
 Barat& Barat::operator=(Barat const& rhs) {
@@ -67,6 +62,10 @@ Bejegyzes& Barat::operator=(Bejegyzes const& rhs) {
         throw "Ez nem Barat";
 }
 
+
+bool Barat::keres(String const& keresendo) {
+    return (getVeznev() == keresendo || getKernev() == keresendo || becenev == keresendo || privat_telszam == keresendo);
+}
 
 void Barat::kiir(std::ostream& os) const {
     getVeznev().kiir(os);

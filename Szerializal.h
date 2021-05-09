@@ -5,6 +5,7 @@
 #define SZERIALIZAL_H
 
 #include <iostream>
+#include "memtrace.h"
 
 
 /// Absztrakt interfesz osztaly sorositashoz/perszisztenciahoz

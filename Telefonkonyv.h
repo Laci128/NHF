@@ -9,15 +9,17 @@
 #include "Szerializal.h"
 #include "String.hpp"
 #include "Bejegyzes.h"
+#include "memtrace.h"
 
 #include <typeinfo>
 
-
+/// Osztaly ami lancolt listaban tarol
+/// Bejegyzes pointereket
 class Telefonkonyv : public Szerializal
 {
 private:
-	Bejegyzes *elso; ///<
-	Bejegyzes *akt;
+	Bejegyzes *elso; ///< Pointer az elso elemre
+	Bejegyzes *akt; //< Pointer az aktualis elemre (fuggvenyeknel kell)
 
 public:
 	///Konstruktor
@@ -29,16 +31,21 @@ public:
 	///Masolo konstruktor
 	Telefonkonyv(Telefonkonyv const& rhs) { *this = rhs; }
 
+
 	///Ertekado operator
 	Telefonkonyv& operator=(Telefonkonyv const& rhs);
 	
 
 	///Destruktor
-	~Telefonkonyv() {};
+	~Telefonkonyv() {
+		delete elso;
+	}
+
+
 
 	//Minden Bejegyzest torol a Telefonkonyvbol
-	void torol_mind();
-
+	//void torol_mind();
+	
 
 	///Kitorli a torlendo Bejegyzest a Telefonkonyvbol
 	void torol(Bejegyzes& torlendo);

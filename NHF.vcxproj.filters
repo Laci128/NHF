@@ -27,6 +27,9 @@
     <ClInclude Include="String.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="memtrace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NHF_tesztek.cpp">
@@ -36,6 +39,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Bejegyzes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="memtrace.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,40 +1,36 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "Telefonkonyv.h"
+#include "memtrace.h"
 
 
 Telefonkonyv& Telefonkonyv::operator=(Telefonkonyv const& rhs) {
 	if (rhs.elso == nullptr)
 		throw "A jobboldali telefonkonyv ures, nem lehet mit atmasolni";
 
-	String ures = "";
-	Bejegyzes* munkatars = new Munkatars(ures, ures, ures);  //< az jobboldali bejegyzesek tipusanak ellenorzesehez
-	Bejegyzes* barat = new Barat(ures, ures, ures, ures);	//< az jobboldali bejegyzesek tipusanak ellenorzesehez
+	//String ures = "";
+	//Bejegyzes* munkatars = new Munkatars(ures, ures, ures);  //< az jobboldali bejegyzesek tipusanak ellenorzesehez
+	//Bejegyzes* barat = new Barat(ures, ures, ures, ures);	//< az jobboldali bejegyzesek tipusanak ellenorzesehez
 	
-	if (typeid(*munkatars) == typeid(*rhs.elso)){
-		elso = new Munkatars(ures, ures, ures);
-		*elso = *rhs.elso;
-	}
-	else if(typeid(*barat) == typeid(*rhs.elso)) {
-		elso = new Barat(ures, ures, ures, ures);
-		*elso = *rhs.elso;
-	}
+	if (rhs.elso->barat_e())
+		elso = new Barat;
+	else
+		elso = new Munkatars;
+	
+	*elso = *rhs.elso;
 
 	Bejegyzes* temp;
 	akt = elso;
 	Bejegyzes* rhs_mozgo = rhs.elso->getKov();
 
 	while (rhs_mozgo != nullptr) {
-		if (typeid(*munkatars) == typeid(*rhs_mozgo)) {
-			temp = new Munkatars(ures, ures, ures);
-			*temp = *rhs_mozgo;
-			akt->setKov(temp);
-		}
-		else if(typeid(*barat) == typeid(*rhs_mozgo)) {
-			temp = new Barat(ures, ures, ures, ures);
-			*temp = *rhs_mozgo;
-			akt->setKov(temp);
-		}
+		if (rhs.elso->barat_e()) 
+			temp = new Barat;
+		else
+			temp = new Munkatars;
+		
+		*temp = *rhs_mozgo;
+		akt->setKov(temp);
 		akt = akt->getKov();
 		rhs_mozgo = rhs_mozgo->getKov();
 	}
@@ -58,7 +54,8 @@ void Telefonkonyv::torol_mind() {
 		elso = akt = nullptr;
 	}
 	else
-		throw "A Telefonkonyv ures, nincs mit torolni!";
+		return;
+		//throw "A Telefonkonyv ures, nincs mit torolni!";
 }
 */
 //
@@ -91,13 +88,21 @@ void Telefonkonyv::torol(Bejegyzes& torlendo) {
 
 
 void Telefonkonyv::hozzaad(Bejegyzes& hozzaadando) {
-	if (elso == nullptr) {
-		elso = &hozzaadando;
+	
+	
+	if (elso == nullptr) {    //< Ha ures a Telefonkonyv
+		if (hozzaadando.barat_e()) {
+			elso = new Barat;
+		}
+		else {
+			elso = new Munkatars;
+		}
+		*elso = hozzaadando;
 		return;
 	}
 
 	akt = elso;
-	while (akt != nullptr) {
+	while (akt != nullptr) {	//< Megnezzuk hogy benne van-e mar
 		if (*akt == hozzaadando) {
 			throw "Ez a bejegyzes mar benne van a telefonkonyvben!";
 			return;
@@ -106,13 +111,20 @@ void Telefonkonyv::hozzaad(Bejegyzes& hozzaadando) {
 	}
 
 	akt = elso;
-	while (akt->getKov() != nullptr) //<elmegyunk az utolso elemig
+	while (akt->getKov() != nullptr) //< Elmegyunk az utolso elemig
 	{
 		akt = akt->getKov();
 	}
 
-	akt->setKov(&hozzaadando);
+	Bejegyzes* temp;
+	if (hozzaadando.barat_e())
+		temp = new Barat;
+	else
+		temp = new Munkatars;
 
+	*temp = hozzaadando;
+	akt->setKov(temp);
+	akt = elso;
 }
 
 

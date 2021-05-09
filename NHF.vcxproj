@@ -140,12 +140,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Bejegyzes.h" />
+    <ClInclude Include="memtrace.h" />
     <ClInclude Include="String.hpp" />
     <ClInclude Include="Szerializal.h" />
     <ClInclude Include="Telefonkonyv.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bejegyzes.cpp" />
+    <ClCompile Include="memtrace.cpp" />
     <ClCompile Include="NHF_tesztek.cpp" />
     <ClCompile Include="Telefonkonyv.cpp" />
   </ItemGroup>

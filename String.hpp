@@ -6,6 +6,8 @@
 #include <cctype>
 #include <cstring>
 #include <iostream>
+#include "memtrace.h"
+
 
 #include "Szerializal.h"
 
@@ -124,14 +126,6 @@ public:
     /// A String streamrol beolvaso fuggvenye
     /// 
     void beolvas(std::istream& is) {
-        /**this = "";
-        char c;
-        is >> c;
-        while (c != '\t')
-        {
-            *this = *this + c;
-            is >> c;
-        }*/
         *this = "";
         char c;
         is >> std::skipws >> c;
