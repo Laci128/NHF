@@ -6,7 +6,7 @@
 #include <iostream>
 
 #include "Szerializal.h"
-#include "String.h"
+#include "String.hpp"
 
 
 class Bejegyzes 

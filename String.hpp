@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
-#ifndef STRING_H
-#define STRING_H
+#ifndef STRING_HPP
+#define STRING_HPP
 
 
 #include <cctype>

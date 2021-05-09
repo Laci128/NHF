@@ -140,14 +140,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Bejegyzes.h" />
-    <ClInclude Include="String.h" />
+    <ClInclude Include="String.hpp" />
     <ClInclude Include="Szerializal.h" />
     <ClInclude Include="Telefonkonyv.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bejegyzes.cpp" />
     <ClCompile Include="NHF_tesztek.cpp" />
-    <ClCompile Include="String.cpp" />
     <ClCompile Include="Telefonkonyv.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

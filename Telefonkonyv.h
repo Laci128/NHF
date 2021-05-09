@@ -7,7 +7,7 @@
 #include <algorithm>
 
 #include "Szerializal.h"
-#include "String.h"
+#include "String.hpp"
 #include "Bejegyzes.h"
 
 #include <typeinfo>
