@@ -89,9 +89,51 @@ int main(void)
 	olvasott_fajl.close();
 
 
+	String vez1 = "Szabo";
+	String ker1 = "Tibor";
+	String munktel1 = "06201548236";
+	Munkatars Szabo(vez1, ker1, munktel1);
+
+
+	String vez2 = "Meszaros";
+	String ker2 = "Laszlo";
+	String nick1 = "Laci";
+	String privtel1 = "+36301234567";
+	Barat Laci(vez2, ker2, nick1, privtel1);
+
+	String vez3 = "Halasi";
+	String ker3 = "Peter";
+	String nick2 = "Peti";
+	String privtel2 = "06304561237";
+	Barat Peti(vez3, ker3, nick2, privtel2);
+
+
+	try
+	{
+		T1.hozzaad(Szabo);
+		//T1.hozzaad(Laci);
+		
+	}
+	catch (const char* hiba)
+	{
+		std::cerr << hiba << std::endl;
+	}
 	
+	try
+	{
+		T1.torol(Laci);  //< elejerol torol
+		T1.torol(Peti);   //< belsejebol torol
+		T1.torol(Szabo);  //< vegerol torol
+	}
+	catch (const char* hiba)
+	{
+		std::cerr << hiba << std::endl;
+
+	}
+
 
 	T1.kiir(std::cout);
+
 	
 	std::ofstream irando_fajl;
 	irando_fajl.open("Test_kiir.txt");
@@ -100,34 +142,6 @@ int main(void)
 	
 //#endif
 
-#if 0
-	Telefonkonyv T2;
-	
-	String vez1 = "Meszaros";
-	String ker1 = "Laszlo";
-	String nick1 = "Laci";
-	String privtel1 = "06301234567";
-
-	String vez2 = "Kis";
-	String ker2 = "Janos";
-	String nick2 = "Jancsi";
-	String privtel2 = "06309876541";
-
-	String vez3 = "Szabo";
-	String ker3 = "Tibor";
-	String munktel1 = "06201548236";
-
-	Barat Laci(vez1, ker1, nick1, privtel1) ;
-	Barat Jancsi(vez2, ker2, nick2, privtel2);
-	Munkatars Szabo(vez3, ker3, munktel1);
-
-	T2.hozzaad(Laci);
-	T2.hozzaad(Szabo);
-	T2.hozzaad(Jancsi);
-
-	T2.kiir(std::cout);
-
-#endif
 
 	return 0;
 }

@@ -31,7 +31,7 @@ public:
 
 
 	//Osszehasonlito operator, hogy a leszarmazottaket megfeleloen hasznalja(?)
-	bool operator==(Bejegyzes const& rhs);
+	virtual bool operator==(Bejegyzes const& rhs) = 0;
 
 
 	String getVeznev() const { return vezeteknev; }
@@ -43,7 +43,9 @@ public:
 	Bejegyzes* getKov() const { return kov; }
 	void setKov(Bejegyzes* kovetkezo) { kov = kovetkezo; }
 
-	virtual Bejegyzes const& operator=(Bejegyzes const& rhs) { return *this; }
+
+	//ez kell??
+	virtual Bejegyzes const& operator=(Bejegyzes const& rhs) { return *this; }  
 
 	virtual void beolvas(std::istream& is) = 0;
 	virtual void kiir(std::ostream& os) const = 0;
@@ -54,7 +56,7 @@ public:
 	
 
 	/// Destruktor
-	virtual ~Bejegyzes() {}
+	virtual ~Bejegyzes() {};
 
 
 };
@@ -71,7 +73,15 @@ public:
 
 
 	bool operator==(Barat const& rhs) {
-		return(this->becenev == rhs.becenev && this->privat_telszam == rhs.privat_telszam && this->getVeznev() == rhs.getVeznev() && this->getKernev() == rhs.getKernev());
+		return(becenev == rhs.becenev && privat_telszam == rhs.privat_telszam && getVeznev() == rhs.getVeznev() && getKernev() == rhs.getKernev());
+	}
+
+	bool operator==(Bejegyzes const& rhs) {
+		const Barat* p = dynamic_cast<const Barat*>(&rhs);
+		if (p != nullptr)
+			return (*this == *p);
+		else
+			return false;
 	}
 
 	Barat const& operator=(Barat const& rhs);
@@ -102,8 +112,17 @@ public:
 
 
 	bool operator==(Munkatars const& rhs) {
-		return(this->munkahelyi_telszam == rhs.munkahelyi_telszam && this->getVeznev() == rhs.getVeznev() && this->getKernev() == rhs.getKernev());
+		return(munkahelyi_telszam == rhs.munkahelyi_telszam && getVeznev() == rhs.getVeznev() && getKernev() == rhs.getKernev());
 	}
+
+	bool operator==(Bejegyzes const& rhs) {
+		const Munkatars* p = dynamic_cast<const Munkatars*>(&rhs);
+		if (p != nullptr)
+			return (*this == *p);
+		else
+			return false;
+	}
+
 
 	Munkatars const& operator=(Munkatars const& rhs);
 
@@ -120,3 +139,5 @@ public:
 };
 
 #endif
+
+

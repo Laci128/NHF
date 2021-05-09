@@ -23,19 +23,28 @@ Telefonkonyv const& Telefonkonyv::operator=(Telefonkonyv const& rhs) {
 ///Keresesbol kellene megoldani
 ///Munkatars vagy Barat
 void Telefonkonyv::torol(Bejegyzes& torlendo) {
-	/*Bejegyzes* temp = &torlendo;
-	
-	if (*elso == *temp) {
-		
+	Bejegyzes* temp;
+	if (*elso == torlendo) {
+		temp = elso->getKov();
+		delete elso;
+		elso = temp;
+		return;
 	}
-
-	akt = elso;
-	Bejegyzes* lemarado = elso;
-	while (!(*akt == torlendo)) {
+	else {
+		akt = elso;
+		Bejegyzes* lemarado = elso;
+		while (!(*akt == torlendo) && akt->getKov() != nullptr) {
+			lemarado = akt;
 			akt = akt->getKov();
-		}*/
-
+		}
+		lemarado->setKov(akt->getKov());
+		delete akt;
+		return;
 	}
+	
+	throw "Nincs ilyen bejegyzes a telefonkonyvben!";
+
+}
 
 
 
@@ -45,11 +54,13 @@ void Telefonkonyv::hozzaad(Bejegyzes& hozzaadando){
 		return;
 	}
 
-	/*akt = elso;
+	akt = elso;
 	while (akt != nullptr) {
-		if (*akt == hozzaadando)
+		if (*akt == hozzaadando) {
 			throw "Ez a bejegyzes mar benne van a telefonkonyvben!";
-	}*/
+		}
+		akt = akt->getKov();
+	}
 
 
 	akt = elso;
@@ -76,7 +87,8 @@ void Telefonkonyv::kiir(std::ostream& os) const
 
 /*
 //A verzio
-void Telefonkonyv::beolvas(std::istream& is){
+void Telefonkonyv::beolvas(std::istream& is) {
+	Bejegyzes* uj;
 	String veznev;
 	String kernev;
 	String temp;
@@ -94,12 +106,12 @@ void Telefonkonyv::beolvas(std::istream& is){
 		is >> space;
 		is >> c;
 		if (c == '\n') {
-			akt = new Munkatars(veznev, kernev, temp);
+			uj = new Munkatars(veznev, kernev, temp);
 
 			if (elso == nullptr)
-				elso = akt;
+				elso = uj;
 			else {
-				akt->setKov(akt);
+				akt->setKov(uj);
 			}
 			akt = akt->getKov();
 			is.putback(space);
@@ -107,25 +119,26 @@ void Telefonkonyv::beolvas(std::istream& is){
 		else {
 			is.putback(c);
 			temp2.beolvas(is);
-			
-			akt = new Barat(veznev, kernev, temp, temp2);
+
+			uj = new Barat(veznev, kernev, temp, temp2);
 
 			if (elso == nullptr)
-				elso = akt;
+				elso = uj;
 			else {
-				akt->setKov(akt);
+				akt->setKov(uj);
 			}
 
 			akt = akt->getKov();
-	
+
 		}
 		is >> space;
 
-	} 
+	}
 
 }*/
 
-//B verzio
+
+//B verzio Mukodik!
 void Telefonkonyv::beolvas(std::istream& is) {
 	String veznev;
 	String kernev;
