@@ -1,6 +1,4 @@
-
 #define _CRT_SECURE_NO_WARNINGS
-
 
 #include <iostream>
 #include <fstream>
@@ -82,6 +80,7 @@ int main(void)
 
 //#if 0
 	Telefonkonyv T1;
+	Telefonkonyv T2;
 
 	std::ifstream olvasott_fajl;
 	olvasott_fajl.open("Test_beolvas.txt");
@@ -93,7 +92,6 @@ int main(void)
 	String ker1 = "Tibor";
 	String munktel1 = "06201548236";
 	Munkatars Szabo(vez1, ker1, munktel1);
-
 
 	String vez2 = "Meszaros";
 	String ker2 = "Laszlo";
@@ -108,6 +106,65 @@ int main(void)
 	Barat Peti(vez3, ker3, nick2, privtel2);
 
 
+	Bejegyzes* talalat = T1.keres(nick2);
+	talalat->kiir(std::cout);
+
+
+#if 0
+	Bejegyzes* barat1 = &Laci;
+	Bejegyzes* barat2 = &Peti;
+
+	barat1->kiir(std::cout);
+	barat2->kiir(std::cout);
+
+	*barat1 = *barat2;
+
+	std::cout << std::endl;
+	barat1->kiir(std::cout);
+	barat2->kiir(std::cout);
+#endif
+
+
+#if 0
+	std::cout << "Torles elott:" << std::endl;
+	T1.kiir(std::cout);
+	T1.torol_mind();
+	std::cout << "Torles utan:" << std::endl;
+	try
+	{
+		T1.kiir(std::cout);
+	}
+	catch (const char* hiba)
+	{
+		std::cerr << hiba << std::endl;
+	}
+#endif
+
+#if 0
+	T2 = T1;
+	std::cout << "T1:"<< std::endl;
+	T1.kiir(std::cout);
+	std::cout << "T2:"<< std::endl;
+	T2.kiir(std::cout);
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	T2.hozzaad(Szabo);
+
+	T1.kiir(std::cout);
+	std::cout << std::endl;
+	T2.kiir(std::cout);
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+
+	T2.torol(Peti);
+	T1.kiir(std::cout);
+	std::cout << std::endl;
+	T2.kiir(std::cout);
+#endif
+
+#if 0
 	try
 	{
 		T1.hozzaad(Szabo);
@@ -131,7 +188,6 @@ int main(void)
 
 	}
 
-
 	T1.kiir(std::cout);
 
 	
@@ -140,7 +196,7 @@ int main(void)
 	T1.kiir(irando_fajl);
 	irando_fajl.close();
 	
-//#endif
+#endif
 
 
 	return 0;

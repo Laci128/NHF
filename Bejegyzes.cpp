@@ -2,51 +2,69 @@
 
 #include "Bejegyzes.h"
 
+//Bejegyzes& operator=
+/*
+Bejegyzes& Bejegyzes::operator=(Bejegyzes const& rhs) {
+    const Barat* ptr = dynamic_cast<const Barat*>(&rhs);
+    if (ptr != nullptr) {
+        Barat temp(*ptr);
+        *this = temp;
+        return *this;
+    }
+    else {
+        const Munkatars* ptr = dynamic_cast<const Munkatars*>(&rhs);
+        if (ptr != nullptr) {
+            *this = *ptr;
+            return *this;
+        }
+    }
+    throw "Hiba Bejegyzes masolasa kozben";
+}*/
+
+//------------------------------------Barat------------------------------------
 
 bool Barat::keres( String const& keresendo) {
-    return (getVeznev() == keresendo || getKernev() == keresendo || becenev == keresendo || privat_telszam == keresendo );
-}
-
-bool Munkatars::keres( String const& keresendo) {
-    return (getVeznev() == keresendo || getKernev()==keresendo || munkahelyi_telszam == keresendo);
+    return (getVeznev() == keresendo || getKernev() == keresendo || becenev == keresendo || privat_telszam == keresendo);
 }
 
 
+bool Barat::operator==(Barat const& rhs) {
+    return(becenev == rhs.becenev && privat_telszam == rhs.privat_telszam && getVeznev() == rhs.getVeznev() && getKernev() == rhs.getKernev());
+}
 
-Barat const& Barat::operator=(Barat const& rhs) {
+
+bool Barat::operator==(Bejegyzes const& rhs) {
+    const Barat* ptr = dynamic_cast<const Barat*>(&rhs);
+    if (ptr != nullptr)
+        return (*this == *ptr);
+    else
+        return false;
+}
+
+
+
+Barat& Barat::operator=(Barat const& rhs) {
     if (this == &rhs)
-        return rhs;
+        return *this;
 
-    getVeznev() = rhs.getVeznev();
-    getKernev() = rhs.getKernev();
+    setVeznev(rhs.getVeznev());
+    setKernev(rhs.getKernev());
     becenev = rhs.becenev;
     privat_telszam = rhs.privat_telszam;
-    setKov(rhs.getKov());
+    setKov(nullptr);
 
     return *this;
 }
 
 
-Munkatars const& Munkatars::operator=(Munkatars const& rhs) {
-    if (this == &rhs)
-        return rhs;
-
-    getVeznev() = rhs.getVeznev();
-    getKernev() = rhs.getKernev();
-    munkahelyi_telszam = rhs.munkahelyi_telszam;
-    setKov(rhs.getKov());
-
-    return *this;
-
-}
-
-
-
-void Barat::beolvas(std::istream& is) {
-    getVeznev().beolvas(is);
-    getKernev().beolvas(is);
-    privat_telszam.beolvas(is);
-
+Bejegyzes& Barat::operator=(Bejegyzes const& rhs) {
+    const Barat* ptr = dynamic_cast<const Barat*>(&rhs);
+    if (ptr != nullptr) {
+        *this = *ptr;
+        return *this;
+    }
+    else
+        throw "Ez nem Barat";
 }
 
 
@@ -55,7 +73,66 @@ void Barat::kiir(std::ostream& os) const {
     getKernev().kiir(os);
     becenev.kiir(os);
     privat_telszam.kiir(os);
+}
 
+
+void Barat::beolvas(std::istream& is) {
+    getVeznev().beolvas(is);
+    getKernev().beolvas(is);
+    privat_telszam.beolvas(is);
+}
+
+
+
+//------------------------------------Munkatars------------------------------------
+
+bool Munkatars::operator==(Munkatars const& rhs) {
+    return(munkahelyi_telszam == rhs.munkahelyi_telszam && getVeznev() == rhs.getVeznev() && getKernev() == rhs.getKernev());
+}
+
+
+bool Munkatars::operator==(Bejegyzes const& rhs) {
+    const Munkatars* p = dynamic_cast<const Munkatars*>(&rhs);
+    if (p != nullptr)
+        return (*this == *p);
+    else
+        return false;
+}
+
+
+Munkatars& Munkatars::operator=(Munkatars const& rhs) {
+    if (this == &rhs)
+        return *this;
+
+    setVeznev(rhs.getVeznev());
+    setKernev(rhs.getKernev());
+    munkahelyi_telszam = rhs.munkahelyi_telszam;
+    setKov(nullptr);
+
+    return *this;
+}
+
+
+Bejegyzes& Munkatars::operator=(Bejegyzes const& rhs) {
+    const Munkatars* ptr = dynamic_cast<const Munkatars*>(&rhs);
+    if (ptr != nullptr) {
+        *this = *ptr;
+        return *this;
+    }
+    else
+        throw "Ez nem Munkatars";
+}
+
+
+bool Munkatars::keres(String const& keresendo) {
+    return (getVeznev() == keresendo || getKernev() == keresendo || munkahelyi_telszam == keresendo);
+}
+
+
+void Munkatars::kiir(std::ostream& os) const {
+    getVeznev().kiir(os);
+    getKernev().kiir(os);
+    munkahelyi_telszam.kiir(os);
 }
 
 
@@ -68,9 +145,3 @@ void Munkatars::beolvas(std::istream& is) {
 
 
 
-
-void Munkatars::kiir(std::ostream& os) const {
-    getVeznev().kiir(os);
-    getKernev().kiir(os);
-    munkahelyi_telszam.kiir(os);
-}

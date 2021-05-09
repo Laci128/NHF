@@ -10,7 +10,7 @@
 #include "String.h"
 #include "Bejegyzes.h"
 
-
+#include <typeinfo>
 
 
 class Telefonkonyv : public Szerializal
@@ -30,16 +30,14 @@ public:
 	Telefonkonyv(Telefonkonyv const& rhs) { *this = rhs; }
 
 	///Ertekado operator
-	Telefonkonyv const& operator=(Telefonkonyv const& rhs);
+	Telefonkonyv& operator=(Telefonkonyv const& rhs);
 	
 
 	///Destruktor
-	~Telefonkonyv()
-	{
-/*		delete elso;
-		delete akt;
-		elso = akt = nullptr;*/
-	};
+	~Telefonkonyv() {};
+
+	//Minden Bejegyzest torol a Telefonkonyvbol
+	void torol_mind();
 
 
 	///Kitorli a torlendo Bejegyzest a Telefonkonyvbol
@@ -55,8 +53,7 @@ public:
 
 
 	// megkeresi az első találatot a telefonkönyvben
-	template<class Funktor>
-	Bejegyzes* keres(String const& keresendo, Funktor fun);
+	Bejegyzes* keres(String const& keresendo);
 	
 	//megkeresi az összes találatot a telefonkönyben és egy újba fűzi
 	//lehet használni rajta a kiíratást
