@@ -256,7 +256,7 @@ Bejegyzes* Telefonkonyv::keres(String const& keresendo) {
 	Bejegyzes* tmp = elso;
 	while (tmp != nullptr)
 	{
-		if (tmp->keres(keresendo))
+		if (tmp->benne_van_e(keresendo))
 			return tmp;
 		tmp = tmp->getKov();
 	}
@@ -272,7 +272,7 @@ Telefonkonyv Telefonkonyv::keres_mind(String const& keresendo) {
 	Telefonkonyv talalat;
 	while (tmp != nullptr)
 	{
-		if (tmp->keres(keresendo))
+		if (tmp->benne_van_e(keresendo))
 			talalat.hozzaad(*tmp);
 		tmp = tmp->getKov();
 	}

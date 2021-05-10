@@ -112,8 +112,16 @@ public:
 
     /// == operator:
     /// Ket Stringet hasonlit ossze
+    /// Igazat ad vissza, ha azonosak
     bool operator==(String const& rhs) {
         return (strcmp(pData, rhs.pData) == 0);
+    }
+
+    /// != operator:
+    /// Ket Stringet hasonlit ossze
+    /// Igazat ad vissza, ha nem azonosak
+    bool operator!=(String const& rhs) {
+        return !(*this == rhs);
     }
 
     /// A String streamre kiiro fuggvenye

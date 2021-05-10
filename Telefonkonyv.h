@@ -41,8 +41,6 @@ public:
 		delete elso;
 	}
 
-
-
 	//Minden Bejegyzest torol a Telefonkonyvbol
 	//void torol_mind();
 	

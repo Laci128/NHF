@@ -22,66 +22,6 @@ Bejegyzes& Bejegyzes::operator=(Bejegyzes const& rhs) {
     throw "Hiba Bejegyzes masolasa kozben";
 }*/
 
-//------------------------------------Barat------------------------------------
-
-bool Barat::operator==(Barat const& rhs) {
-    return(becenev == rhs.becenev && privat_telszam == rhs.privat_telszam && getVeznev() == rhs.getVeznev() && getKernev() == rhs.getKernev());
-}
-
-
-bool Barat::operator==(Bejegyzes const& rhs) {
-    const Barat* ptr = dynamic_cast<const Barat*>(&rhs);
-    if (ptr != nullptr)
-        return (*this == *ptr);
-    else
-        return false;
-}
-
-
-Barat& Barat::operator=(Barat const& rhs) {
-    if (this == &rhs)
-        return *this;
-
-    setVeznev(rhs.getVeznev());
-    setKernev(rhs.getKernev());
-    becenev = rhs.becenev;
-    privat_telszam = rhs.privat_telszam;
-    setKov(nullptr);
-
-    return *this;
-}
-
-
-Bejegyzes& Barat::operator=(Bejegyzes const& rhs) {
-    const Barat* ptr = dynamic_cast<const Barat*>(&rhs);
-    if (ptr != nullptr) {
-        *this = *ptr;
-        return *this;
-    }
-    else
-        throw "Ez nem Barat";
-}
-
-
-bool Barat::keres(String const& keresendo) {
-    return (getVeznev() == keresendo || getKernev() == keresendo || becenev == keresendo || privat_telszam == keresendo);
-}
-
-void Barat::kiir(std::ostream& os) const {
-    getVeznev().kiir(os);
-    getKernev().kiir(os);
-    becenev.kiir(os);
-    privat_telszam.kiir(os);
-}
-
-
-void Barat::beolvas(std::istream& is) {
-    getVeznev().beolvas(is);
-    getKernev().beolvas(is);
-    privat_telszam.beolvas(is);
-}
-
-
 
 //------------------------------------Munkatars------------------------------------
 
@@ -119,11 +59,11 @@ Bejegyzes& Munkatars::operator=(Bejegyzes const& rhs) {
         return *this;
     }
     else
-        throw "Ez nem Munkatars";
+        throw "A jobboldali nem Munkatars!";
 }
 
 
-bool Munkatars::keres(String const& keresendo) {
+bool Munkatars::benne_van_e(String const& keresendo) {
     return (getVeznev() == keresendo || getKernev() == keresendo || munkahelyi_telszam == keresendo);
 }
 
@@ -141,6 +81,65 @@ void Munkatars::beolvas(std::istream& is) {
     munkahelyi_telszam.beolvas(is);
 }
 
+
+//------------------------------------Barat------------------------------------
+
+bool Barat::operator==(Barat const& rhs) {
+    return(becenev == rhs.becenev && privat_telszam == rhs.privat_telszam && getVeznev() == rhs.getVeznev() && getKernev() == rhs.getKernev());
+}
+
+
+bool Barat::operator==(Bejegyzes const& rhs) {
+    const Barat* ptr = dynamic_cast<const Barat*>(&rhs);
+    if (ptr != nullptr)
+        return (*this == *ptr);
+    else
+        return false;
+}
+
+
+Barat& Barat::operator=(Barat const& rhs) {
+    if (this == &rhs)
+        return *this;
+
+    setVeznev(rhs.getVeznev());
+    setKernev(rhs.getKernev());
+    becenev = rhs.becenev;
+    privat_telszam = rhs.privat_telszam;
+    setKov(nullptr);
+
+    return *this;
+}
+
+
+Bejegyzes& Barat::operator=(Bejegyzes const& rhs) {
+    const Barat* ptr = dynamic_cast<const Barat*>(&rhs);
+    if (ptr != nullptr) {
+        *this = *ptr;
+        return *this;
+    }
+    else
+        throw "A jobboldali nem Barat!";
+}
+
+
+bool Barat::benne_van_e(String const& keresendo) {
+    return (getVeznev() == keresendo || getKernev() == keresendo || becenev == keresendo || privat_telszam == keresendo);
+}
+
+void Barat::kiir(std::ostream& os) const {
+    getVeznev().kiir(os);
+    getKernev().kiir(os);
+    becenev.kiir(os);
+    privat_telszam.kiir(os);
+}
+
+
+void Barat::beolvas(std::istream& is) {
+    getVeznev().beolvas(is);
+    getKernev().beolvas(is);
+    privat_telszam.beolvas(is);
+}
 
 
 
