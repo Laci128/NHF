@@ -76,8 +76,11 @@ void Munkatars::kiir(std::ostream& os) const {
 
 
 void Munkatars::beolvas(std::istream& is) {
-    getVeznev().beolvas(is);
-    getKernev().beolvas(is);
+    String temp;
+    temp.beolvas(is);
+    setVeznev(temp);
+    temp.beolvas(is);
+    setKernev(temp);
     munkahelyi_telszam.beolvas(is);
 }
 
@@ -136,8 +139,12 @@ void Barat::kiir(std::ostream& os) const {
 
 
 void Barat::beolvas(std::istream& is) {
-    getVeznev().beolvas(is);
-    getKernev().beolvas(is);
+    String temp;
+    temp.beolvas(is);
+    setVeznev(temp);
+    temp.beolvas(is);
+    setKernev(temp);
+    becenev.beolvas(is);
     privat_telszam.beolvas(is);
 }
 

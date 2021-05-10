@@ -34,15 +34,18 @@ public:
 
 	///Ertekado operator
 	Telefonkonyv& operator=(Telefonkonyv const& rhs);
+
+	//Osszehasonlito operator
+	bool operator==(Telefonkonyv const& rhs);
 	
 
 	///Destruktor
 	~Telefonkonyv() {
-		delete elso;
+		torol_mind();
 	}
 
 	//Minden Bejegyzest torol a Telefonkonyvbol
-	//void torol_mind();
+	void torol_mind();
 	
 
 	///Kitorli a torlendo Bejegyzest a Telefonkonyvbol
@@ -57,12 +60,10 @@ public:
 	void beolvas(std::istream& is);
 
 
-	// megkeresi az első találatot a telefonkönyvben
+	// megkeresi az elso talalatot a telefonkönyvben
 	Bejegyzes* keres(String const& keresendo);
 	
-	//megkeresi az összes találatot a telefonkönyben és egy újba fűzi
-	//lehet használni rajta a kiíratást
-	Telefonkonyv keres_mind(String const& keresendo);
+
 
 };
 

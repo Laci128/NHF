@@ -8,10 +8,6 @@ Telefonkonyv& Telefonkonyv::operator=(Telefonkonyv const& rhs) {
 	if (rhs.elso == nullptr)
 		throw "A jobboldali telefonkonyv ures, nem lehet mit atmasolni";
 
-	//String ures = "";
-	//Bejegyzes* munkatars = new Munkatars(ures, ures, ures);  //< az jobboldali bejegyzesek tipusanak ellenorzesehez
-	//Bejegyzes* barat = new Barat(ures, ures, ures, ures);	//< az jobboldali bejegyzesek tipusanak ellenorzesehez
-	
 	if (rhs.elso->barat_e())
 		elso = new Barat;
 	else
@@ -24,7 +20,7 @@ Telefonkonyv& Telefonkonyv::operator=(Telefonkonyv const& rhs) {
 	Bejegyzes* rhs_mozgo = rhs.elso->getKov();
 
 	while (rhs_mozgo != nullptr) {
-		if (rhs.elso->barat_e()) 
+		if (rhs_mozgo->barat_e()) 
 			temp = new Barat;
 		else
 			temp = new Munkatars;
@@ -38,13 +34,29 @@ Telefonkonyv& Telefonkonyv::operator=(Telefonkonyv const& rhs) {
 	return *this;
 }
 
+bool Telefonkonyv::operator==(Telefonkonyv const& rhs) {
+	akt = elso;
+	Bejegyzes* mozgo_rhs = rhs.elso;
 
-//Ez rossz es nem is kell
+	while (mozgo_rhs != nullptr && akt !=nullptr){
+		if (!(*akt == *mozgo_rhs))
+			return false;
+		akt = akt->getKov();
+		mozgo_rhs = mozgo_rhs->getKov();
+	}
+	if (mozgo_rhs == nullptr && akt == nullptr)
+		return true;
+	else
+		return false;
+}
+
+
+
 //torol_mind
-//
-/*
 void Telefonkonyv::torol_mind() {
-	if (elso != nullptr) {
+	if (elso == nullptr)
+		return;
+	else {
 		akt = elso;
 		while (akt != nullptr) {
 			Bejegyzes* temp = akt->getKov();
@@ -53,13 +65,8 @@ void Telefonkonyv::torol_mind() {
 		}
 		elso = akt = nullptr;
 	}
-	else
-		return;
-		//throw "A Telefonkonyv ures, nincs mit torolni!";
+	
 }
-*/
-//
-//
 
 
 void Telefonkonyv::torol(Bejegyzes& torlendo) {
@@ -77,9 +84,12 @@ void Telefonkonyv::torol(Bejegyzes& torlendo) {
 			lemarado = akt;
 			akt = akt->getKov();
 		}
-		lemarado->setKov(akt->getKov());
-		delete akt;
-		return;
+		if (*akt == torlendo) {
+			lemarado->setKov(akt->getKov());
+			delete akt;
+			akt = lemarado;
+			return;
+		}
 	}
 	
 	throw "Nincs ilyen bejegyzes a telefonkonyvben!";
@@ -143,8 +153,8 @@ void Telefonkonyv::kiir(std::ostream& os) const {
 }
 
 
-/*
 //A verzio
+/*
 void Telefonkonyv::beolvas(std::istream& is) {
 	Bejegyzes* uj;
 	String veznev;
@@ -194,7 +204,6 @@ void Telefonkonyv::beolvas(std::istream& is) {
 	}
 
 }*/
-
 
 //B verzio Mukodik!
 void Telefonkonyv::beolvas(std::istream& is) {
@@ -264,17 +273,3 @@ Bejegyzes* Telefonkonyv::keres(String const& keresendo) {
 	return nullptr;
 }
 
-
-//megkeresi az osszes talalatot a telefonkonyvben es egy ujba fuzi
-	//lehet hasznalni rajta a kiiratast
-Telefonkonyv Telefonkonyv::keres_mind(String const& keresendo) {
-	Bejegyzes* tmp = elso;
-	Telefonkonyv talalat;
-	while (tmp != nullptr)
-	{
-		if (tmp->benne_van_e(keresendo))
-			talalat.hozzaad(*tmp);
-		tmp = tmp->getKov();
-	}
-	return talalat;
-}

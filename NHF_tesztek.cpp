@@ -13,7 +13,7 @@
 
 int main(void) {	
 	
-	int Osszes_teszt = 27;
+	int Osszes_teszt = 35;
 	int Hibas_teszt = 0;
 	
 	String vez1 = "Szabo";
@@ -344,131 +344,208 @@ int main(void) {
 	else
 		std::cout << "Jo a Barat beolvasasa" << std::endl;
 	
+	//Teszt 11b
+	Barat Laci_kiirando = Laci;
+
+	std::ofstream barat_kiir;
+	barat_kiir.open("Test_barat_kiir.txt");
+	Laci_kiirando.kiir(barat_kiir);
+	barat_kiir.close();
+
+	std::ifstream barat_kiir_teszt;
+	barat_kiir_teszt.open("Test_barat_kiir.txt");
+	Laci_beolvasott.beolvas(barat_kiir_teszt);
+	barat_kiir_teszt.close();
+	if (!(Laci_beolvasott == Laci_kiirando)) {
+		Hibas_teszt++;
+		std::cout << "Hibas a Barat kiirasa!\n" << std::endl;
+	}
+	else
+		std::cout << "Jo a Barat kiirasa\n" << std::endl;
 
 
-	String vez3 = "Halasi";
-	String ker3 = "Peter";
+
+	//Telefonkonyv osszehasonlito operator tesztje
+	//Teszt 12
+	Telefonkonyv T4;
+	Telefonkonyv T5;
+	T4.hozzaad(Laci);
+	T4.hozzaad(Szabo);
+	T5.hozzaad(Laci);
+	T5.hozzaad(Szabo);
+	if (!(T4 == T5)) {
+		Hibas_teszt++;
+		std::cout << "Hibas a Telefonkonyv osszehasonlito operatora!\n" << std::endl;
+	}
+	else
+		std::cout << "Jo a Telefonkonyv osszehasonlito operatora\n" << std::endl;
+
+	
+	//Telefonkonyv ertekado operator tesztje
+	//Teszt 13
+	Telefonkonyv T6;
+	
+	try {
+		T6 = T4;
+	}
+	catch (const char* hiba){
+		std::cerr << hiba << std::endl;
+	}
+	if (!(T4 == T6)) {
+		Hibas_teszt++;
+		std::cout << "Hibas a Telefonkonyv ertekado operatora!\n" << std::endl;
+	}
+	else
+		std::cout << "Jo a Telefonkonyv ertekado operatora\n" << std::endl;
+
+
+	//Telefonkonyv masolo konstruktor tesztje
+	//Teszt 14
+	Telefonkonyv T7(T4);
+	if (!(T4 == T7)) {
+		Hibas_teszt++;
+		std::cout << "Hibas a Telefonkonyv masolo konstruktora!\n" << std::endl;
+	}
+	else
+		std::cout << "Jo a Telefonkonyv masolo konstruktora\n" << std::endl;
+
+
+	//Telefonkonyv kiir es beolvas tesztje
+	//Teszt 15a
+	Telefonkonyv T1;
+	
+	std::ifstream telefonkonyv_olvasas;
+	telefonkonyv_olvasas.open("Test_telefonkonyv_beolvas.txt");
+	T1.beolvas(telefonkonyv_olvasas);
+	telefonkonyv_olvasas.close();
+	
+	
+	std::cout << "****A beolvasando txt tartalma****\n"
+		<< "Meszaros Laszlo Laci +36301234567 \n"
+		<< "Nagy Istvan 06209876543 \n"
+		<< "Halasi Peter Peti 06304561237 \n";
+	
+	std::cout << "****A beolvasott szoveg****" << std::endl;
+	T1.kiir(std::cout);
+
+	//Ellenorizzuk a belolvasast
+	Telefonkonyv T2;
+	T2.hozzaad(Laci);
+
+	String vez3 = "Nagy";
+	String ker3 = "Istvan";
+	String munktel2 = "06209876543";
+	Munkatars Nagy(vez3, ker3, munktel2);
+	T2.hozzaad(Nagy);
+
+	String vez4 = "Halasi";
+	String ker4 = "Peter";
 	String nick2 = "Peti";
 	String privtel2 = "06304561237";
-	Barat Peti(vez3, ker3, nick2, privtel2);
-	
-#if 0
-	Telefonkonyv T1;
-	Telefonkonyv T2;
-
-	std::ifstream olvasott_fajl;
-	olvasott_fajl.open("Test_beolvas.txt");
-	T1.beolvas(olvasott_fajl);
-	olvasott_fajl.close();
-
-
-	Bejegyzes* talalat = T1.keres(nick2);
-	talalat->kiir(std::cout);
-
-	T1.torol_mind();
-
-	
-	T1.kiir(std::cout);
-	std::cout << std::endl;
-	T1.hozzaad(Szabo);
-	T1.kiir(std::cout);
-	
-	T2.hozzaad(Szabo);
-	T2.kiir(std::cout);
-	std::cout << std::endl;
+	Barat Peti(vez4, ker4, nick2, privtel2);
 	T2.hozzaad(Peti);
-	T2.kiir(std::cout);
-
 	
-#endif
-
-#if 0
-	Bejegyzes* barat1 = &Laci;
-	Bejegyzes* barat2 = &Peti;
-
-	barat1->kiir(std::cout);
-	barat2->kiir(std::cout);
-
-	*barat1 = *barat2;
-
-	std::cout << std::endl;
-	barat1->kiir(std::cout);
-	barat2->kiir(std::cout);
-#endif
-
-
-#if 0
-	std::cout << "Torles elott:" << std::endl;
-	T1.kiir(std::cout);
-	T1.torol_mind();
-	std::cout << "Torles utan:" << std::endl;
-	try
-	{
-		T1.kiir(std::cout);
+	if (!(T1 == T2)) {
+		Hibas_teszt++;
+		std::cout << "\nHibas a Telefonkonyv beolvasasa!\n" << std::endl;
 	}
-	catch (const char* hiba)
-	{
+	else
+		std::cout << "\nJo a Telefonkonyv beolvasasa\n" << std::endl;
+
+	//Teszt 15b
+	std::ofstream telefonkonyv_kiir;
+	telefonkonyv_kiir.open("Test_telefonkonyv_kiir.txt");
+	T2.kiir(telefonkonyv_kiir);
+	telefonkonyv_kiir.close();
+
+	Telefonkonyv T3;
+	std::ifstream telefonkonyv_kiir_teszt;
+	telefonkonyv_kiir_teszt.open("Test_telefonkonyv_kiir.txt");
+	T3.beolvas(telefonkonyv_kiir_teszt);
+	telefonkonyv_kiir_teszt.close();
+
+	if (!(T3 == T2)) {
+		Hibas_teszt++;
+		std::cout << "Hibas a Telefonkonyv kiirasa!\n" << std::endl;
+	}
+	else
+		std::cout << "Jo a Telefonkonyv kiirasa\n" << std::endl;
+
+
+	//Telefonkonyv hozzaad tesztje
+	//Teszt 16
+	Telefonkonyv T8;
+	Telefonkonyv T9;
+
+	T8.hozzaad(Laci);
+	T9.hozzaad(Laci);
+	T8.hozzaad(Szabo);
+	T9.hozzaad(Szabo);
+	
+	if (T8 == T9) {
+		T9.hozzaad(Peti);
+		if (T8 == T9) {
+			Hibas_teszt++;
+			std::cout << "Hibas a Telefonkonyv hozzaadasa!\n" << std::endl;
+		}
+		else {
+			try{
+				T8.hozzaad(Szabo);
+			}
+			catch (const char* hiba)
+			{
+				std::cerr << hiba << std::endl;		
+				std::cout << "Jo a Telefonkonyv hozzaadasa\n" << std::endl;
+
+			}
+		}
+	}
+	else{
+		Hibas_teszt++;
+		std::cout << "Hibas a Telefonkonyv hozzaadasa!\n" << std::endl;
+	}
+
+	//Telefonkonyv torles tesztje
+	//Teszt 17
+	Telefonkonyv T10;
+	T10.hozzaad(Laci);
+	T10.hozzaad(Szabo);
+	T10.hozzaad(Peti);
+
+	T10.torol(Laci);
+	T10.torol(Peti);
+
+	Telefonkonyv T11;
+	T11.hozzaad(Szabo);
+
+	if (!(T10 == T11)) {
+		Hibas_teszt++;
+		std::cout << "Hibas a Telefonkonyv torlese!\n" << std::endl;
+	}
+
+	try{
+		T10.torol(Peti);
+	}
+	catch (const char* hiba){
 		std::cerr << hiba << std::endl;
-	}
-#endif
-
-#if 0
-	T2 = T1;
-	std::cout << "T1:"<< std::endl;
-	T1.kiir(std::cout);
-	std::cout << "T2:"<< std::endl;
-	T2.kiir(std::cout);
-	std::cout << std::endl;
-	std::cout << std::endl;
-
-	T2.hozzaad(Szabo);
-
-	T1.kiir(std::cout);
-	std::cout << std::endl;
-	T2.kiir(std::cout);
-	std::cout << std::endl;
-	std::cout << std::endl;
-
-
-	T2.torol(Peti);
-	T1.kiir(std::cout);
-	std::cout << std::endl;
-	T2.kiir(std::cout);
-#endif
-
-#if 0
-	try
-	{
-		T1.hozzaad(Szabo);
-		//T1.hozzaad(Laci);
-		
-	}
-	catch (const char* hiba)
-	{
-		std::cerr << hiba << std::endl;
-	}
-	
-	try
-	{
-		T1.torol(Laci);  //< elejerol torol
-		T1.torol(Peti);   //< belsejebol torol
-		T1.torol(Szabo);  //< vegerol torol
-	}
-	catch (const char* hiba)
-	{
-		std::cerr << hiba << std::endl;
-
+		std::cout << "Jo a Telefonkonyv torlese\n" << std::endl;
 	}
 
-	T1.kiir(std::cout);
 
-	
-	std::ofstream irando_fajl;
-	irando_fajl.open("Test_kiir.txt");
-	T1.kiir(irando_fajl);
-	irando_fajl.close();
-	
-#endif
+	//Telefonkonyv keres tesztje
+
+	Bejegyzes* talalat1 = T1.keres(nick2);  //< nick2 ==  Peti
+
+
+	String munktel3 = "+361587425";
+	Bejegyzes* talalat2 = T1.keres(munktel3);  
+
+	if ((*talalat1 == Peti) && (talalat2 == nullptr)) 
+		std::cout << "Jo a Telefonkonyv keresese\n" << std::endl;
+	else {
+		Hibas_teszt++;
+		std::cout << "Hibas a Telefonkonyv keresese!\n" << std::endl;
+	}
 
 
 	std::cout << "\nHibas/Osszes teszt: " << Hibas_teszt << "/" << Osszes_teszt << std::endl;
