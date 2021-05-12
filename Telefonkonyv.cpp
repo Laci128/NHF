@@ -153,59 +153,6 @@ void Telefonkonyv::kiir(std::ostream& os) const {
 }
 
 
-//A verzio
-/*
-void Telefonkonyv::beolvas(std::istream& is) {
-	Bejegyzes* uj;
-	String veznev;
-	String kernev;
-	String temp;
-	String temp2;
-	char space;
-	char c;
-	char fajl_vege_e;
-
-	while (is >> c && is >> fajl_vege_e) {
-		is.putback(fajl_vege_e);
-		is.putback(c);
-		veznev.beolvas(is);
-		kernev.beolvas(is);
-		temp.beolvas(is);
-		is >> space;
-		is >> c;
-		if (c == '\n') {
-			uj = new Munkatars(veznev, kernev, temp);
-
-			if (elso == nullptr)
-				elso = uj;
-			else {
-				akt->setKov(uj);
-			}
-			akt = akt->getKov();
-			is.putback(space);
-		}
-		else {
-			is.putback(c);
-			temp2.beolvas(is);
-
-			uj = new Barat(veznev, kernev, temp, temp2);
-
-			if (elso == nullptr)
-				elso = uj;
-			else {
-				akt->setKov(uj);
-			}
-
-			akt = akt->getKov();
-
-		}
-		is >> space;
-
-	}
-
-}*/
-
-//B verzio Mukodik!
 void Telefonkonyv::beolvas(std::istream& is) {
 	String veznev;
 	String kernev;

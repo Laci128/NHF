@@ -3,26 +3,6 @@
 #include "Bejegyzes.h"
 #include "memtrace.h"
 
-//Bejegyzes& operator=
-/*
-Bejegyzes& Bejegyzes::operator=(Bejegyzes const& rhs) {
-    const Barat* ptr = dynamic_cast<const Barat*>(&rhs);
-    if (ptr != nullptr) {
-        Barat temp(*ptr);
-        *this = temp;
-        return *this;
-    }
-    else {
-        const Munkatars* ptr = dynamic_cast<const Munkatars*>(&rhs);
-        if (ptr != nullptr) {
-            *this = *ptr;
-            return *this;
-        }
-    }
-    throw "Hiba Bejegyzes masolasa kozben";
-}*/
-
-
 //------------------------------------Munkatars------------------------------------
 
 bool Munkatars::operator==(Munkatars const& rhs) {

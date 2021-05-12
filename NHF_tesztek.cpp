@@ -5,7 +5,7 @@
 #include <fstream>
 
 #include "Szerializal.h"
-#include "String.h"
+#include "String.hpp"
 #include "Bejegyzes.h"
 #include "Telefonkonyv.h"
 #include "memtrace.h"
@@ -13,7 +13,7 @@
 
 int main(void) {	
 	
-	int Osszes_teszt = 35;
+	int Osszes_teszt = 37;
 	int Hibas_teszt = 0;
 	
 	String vez1 = "Szabo";
@@ -142,7 +142,6 @@ int main(void) {
 		std::cout << "Jo a Barat Bejegyzeses osszehasonlito operatora\n" << std::endl;
 
 
-
 	//Masolo kontstruktor tesztek
 	//Teszt 5a
 	Munkatars Szabo3(Szabo);
@@ -191,9 +190,15 @@ int main(void) {
 		Hibas_teszt++;
 		std::cout << "Hibas a Munkatars Bejegyzeses ertekado operatora!" << std::endl;
 	}
-	else
+	else {
+	try {
+		*Bej_Szabo = *Bej_Laci;
+	}
+	catch (const char* hiba) {
+		std::cout << hiba << std::endl;
 		std::cout << "Jo a Munkatars Bejegyzeses ertekado operatora" << std::endl;
-
+	}
+	}
 	//Teszt 6d
 	Barat Laci5;
 	Bejegyzes* Bej_Laci5 = &Laci5;
@@ -202,8 +207,15 @@ int main(void) {
 		Hibas_teszt++;
 		std::cout << "Hibas a Barat Bejegyzeses ertekado operatora!\n" << std::endl;
 	}
-	else
-		std::cout << "Jo a Barat Bejegyzeses ertekado operatora\n" << std::endl;
+	else {
+		try {
+			*Bej_Laci = *Bej_Szabo;
+		}
+		catch (const char* hiba){
+			std::cout << hiba << std::endl;
+			std::cout << "Jo a Barat Bejegyzeses ertekado operatora\n" << std::endl;
+		}
+	}
 
 
 
@@ -385,11 +397,21 @@ int main(void) {
 	//Teszt 13
 	Telefonkonyv T6;
 	
+	Telefonkonyv ures;
+
+	try {
+		T6 = ures;
+	}
+	catch (const char* hiba) {
+		std::cout << hiba << std::endl;
+	}
+
+
 	try {
 		T6 = T4;
 	}
 	catch (const char* hiba){
-		std::cerr << hiba << std::endl;
+		std::cout << hiba << std::endl;
 	}
 	if (!(T4 == T6)) {
 		Hibas_teszt++;
@@ -453,6 +475,16 @@ int main(void) {
 		std::cout << "\nJo a Telefonkonyv beolvasasa\n" << std::endl;
 
 	//Teszt 15b
+	Telefonkonyv ures2;
+	try {
+		ures2.kiir(std::cout);
+	}
+	catch (const char* hiba) {
+		std::cout << hiba << std::endl;
+	}
+
+
+
 	std::ofstream telefonkonyv_kiir;
 	telefonkonyv_kiir.open("Test_telefonkonyv_kiir.txt");
 	T2.kiir(telefonkonyv_kiir);
@@ -494,7 +526,7 @@ int main(void) {
 			}
 			catch (const char* hiba)
 			{
-				std::cerr << hiba << std::endl;		
+				std::cout << hiba << std::endl;		
 				std::cout << "Jo a Telefonkonyv hozzaadasa\n" << std::endl;
 
 			}
@@ -527,7 +559,7 @@ int main(void) {
 		T10.torol(Peti);
 	}
 	catch (const char* hiba){
-		std::cerr << hiba << std::endl;
+		std::cout << hiba << std::endl;
 		std::cout << "Jo a Telefonkonyv torlese\n" << std::endl;
 	}
 

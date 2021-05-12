@@ -60,7 +60,7 @@ public:
 	void beolvas(std::istream& is);
 
 
-	// megkeresi az elso talalatot a telefonkönyvben
+	//Megkeresi az elso talalatot a telefonkönyvben
 	Bejegyzes* keres(String const& keresendo);
 	
 

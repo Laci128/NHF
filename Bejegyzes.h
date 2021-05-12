@@ -30,7 +30,8 @@ public:
 		:vezeteknev(""), keresztnev(""), kov(nullptr)
 	{}
 
-
+	//getter es setter fuggvenyek
+	//hogy az osztalyon kivul is hozzajuk lehessen ferni
 	String getVeznev() const { return vezeteknev; }
 	void setVeznev(String const& vez) { vezeteknev = vez; }
 
@@ -41,16 +42,22 @@ public:
 	void setKov(Bejegyzes* kovetkezo) { kov = kovetkezo; }
 
 
-	//Osszehasonlito operator, hogy a leszarmazottaket megfeleloen hasznalja
+	//Virtualisok fgv-ek a a leszarmazottaknal létrehozva
 	virtual bool operator==(Bejegyzes const& rhs) = 0;
 
 	virtual Bejegyzes& operator=(Bejegyzes const& rhs) = 0;
-	//Bejegyzes& operator=(Bejegyzes const& rhs);
 
+	//A leszarmazottak tipusanak lekerdezeshez
+	//Ha Barat igazat vissza
+	//Egyebkent Munkatars es hamisat
 	virtual bool barat_e() = 0;
 
+
+	//A leszarmazott osztalyoknal megnezi, hogy
+	//Valamelyik parametere megegyezik a keresendo Stringgel
 	virtual bool benne_van_e(String const& keresendo) = 0;
 
+	
 	virtual void beolvas(std::istream& is) = 0;
 	virtual void kiir(std::ostream& os) const = 0;
 
@@ -66,7 +73,8 @@ private:
 	String munkahelyi_telszam;
 
 public:
-
+	/// Konstruktor
+	///
 	Munkatars(String const& vezetek, String const& kereszt, String const& munk_tel)
 		:Bejegyzes(vezetek, kereszt), munkahelyi_telszam(munk_tel)
 	{}
@@ -106,6 +114,8 @@ private:
 	String privat_telszam;
 
 public:
+	/// Konstruktor
+	///
 	Barat(String const& vezetek, String const& kereszt, String const& nick, String const& priv_tel)
 		:Bejegyzes(vezetek, kereszt), becenev(nick), privat_telszam(priv_tel)
 	{}
@@ -142,5 +152,3 @@ public:
 };
 
 #endif
-
-
