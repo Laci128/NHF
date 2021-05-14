@@ -43,19 +43,19 @@ public:
 
 
 	//Virtualisok fgv-ek a a leszarmazottaknal létrehozva
-	virtual bool operator==(Bejegyzes const& rhs) = 0;
+	virtual bool operator==(Bejegyzes const& rhs) const = 0;
 
 	virtual Bejegyzes& operator=(Bejegyzes const& rhs) = 0;
 
 	//A leszarmazottak tipusanak lekerdezeshez
 	//Ha Barat igazat vissza
 	//Egyebkent Munkatars es hamisat
-	virtual bool barat_e() = 0;
+	virtual bool barat_e() const = 0;
 
 
 	//A leszarmazott osztalyoknal megnezi, hogy
 	//Valamelyik parametere megegyezik a keresendo Stringgel
-	virtual bool benne_van_e(String const& keresendo) = 0;
+	virtual bool benne_van_e(String const& keresendo) const  = 0;
 
 	
 	virtual void beolvas(std::istream& is) = 0;
@@ -89,15 +89,15 @@ public:
 
 	Munkatars(Munkatars const& rhs) { *this = rhs; }
 
-	bool operator==(Munkatars const& rhs);
-	bool operator==(Bejegyzes const& rhs);
+	bool operator==(Munkatars const& rhs) const;
+	bool operator==(Bejegyzes const& rhs) const ;
 
 	Munkatars& operator=(Munkatars const& rhs);
 	Bejegyzes& operator=(Bejegyzes const& rhs);
 
-	bool barat_e() { return false; }
+	bool barat_e() const { return false; }
 
-	bool benne_van_e( String const& keresendo) ;
+	bool benne_van_e( String const& keresendo) const;
 
 	void kiir(std::ostream& os) const;
 	void beolvas(std::istream& is);
@@ -132,15 +132,15 @@ public:
 
 	Barat(Barat const& rhs) { *this = rhs; }
 
-	bool operator==(Barat const& rhs);
-	bool operator==(Bejegyzes const& rhs);
+	bool operator==(Barat const& rhs) const;
+	bool operator==(Bejegyzes const& rhs) const;
 
 	Barat& operator=(Barat const& rhs);
 	Bejegyzes& operator=(Bejegyzes const& rhs);
 
-	bool barat_e() { return true; }
+	bool barat_e() const { return true; }
 
-	bool benne_van_e(String const& keresendo);
+	bool benne_van_e(String const& keresendo) const;
 
 	void kiir(std::ostream& os) const;
 	void beolvas(std::istream& is);

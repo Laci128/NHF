@@ -5,12 +5,12 @@
 
 //------------------------------------Munkatars------------------------------------
 
-bool Munkatars::operator==(Munkatars const& rhs) {
+bool Munkatars::operator==(Munkatars const& rhs) const {
     return(munkahelyi_telszam == rhs.munkahelyi_telszam && getVeznev() == rhs.getVeznev() && getKernev() == rhs.getKernev());
 }
 
 
-bool Munkatars::operator==(Bejegyzes const& rhs) {
+bool Munkatars::operator==(Bejegyzes const& rhs) const {
     const Munkatars* p = dynamic_cast<const Munkatars*>(&rhs);
     if (p != nullptr)
         return (*this == *p);
@@ -43,7 +43,7 @@ Bejegyzes& Munkatars::operator=(Bejegyzes const& rhs) {
 }
 
 
-bool Munkatars::benne_van_e(String const& keresendo) {
+bool Munkatars::benne_van_e(String const& keresendo) const {
     return (getVeznev() == keresendo || getKernev() == keresendo || munkahelyi_telszam == keresendo);
 }
 
@@ -67,12 +67,12 @@ void Munkatars::beolvas(std::istream& is) {
 
 //------------------------------------Barat------------------------------------
 
-bool Barat::operator==(Barat const& rhs) {
+bool Barat::operator==(Barat const& rhs) const {
     return(becenev == rhs.becenev && privat_telszam == rhs.privat_telszam && getVeznev() == rhs.getVeznev() && getKernev() == rhs.getKernev());
 }
 
 
-bool Barat::operator==(Bejegyzes const& rhs) {
+bool Barat::operator==(Bejegyzes const& rhs) const {
     const Barat* ptr = dynamic_cast<const Barat*>(&rhs);
     if (ptr != nullptr)
         return (*this == *ptr);
@@ -106,7 +106,7 @@ Bejegyzes& Barat::operator=(Bejegyzes const& rhs) {
 }
 
 
-bool Barat::benne_van_e(String const& keresendo) {
+bool Barat::benne_van_e(String const& keresendo) const {
     return (getVeznev() == keresendo || getKernev() == keresendo || becenev == keresendo || privat_telszam == keresendo);
 }
 

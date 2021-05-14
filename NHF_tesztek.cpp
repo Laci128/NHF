@@ -165,7 +165,8 @@ int main(void) {
 
 	//Ertekado operator tesztek
 	//Teszt 6a
-	Munkatars Szabo4 = Szabo;
+	Munkatars Szabo4;
+	Szabo4 = Szabo;
 	if (!(Szabo == Szabo4)) {
 		Hibas_teszt++;
 		std::cout << "Hibas a Munkatars ertekado operatora!" << std::endl;
@@ -174,7 +175,8 @@ int main(void) {
 		std::cout << "Jo a Munkatars ertekado operatora" << std::endl;
 
 	//Teszt 6b
-	Barat Laci4 = Laci;
+	Barat Laci4;
+	Laci4 = Laci;
 	if (!(Laci == Laci4)) {
 		Hibas_teszt++;
 		std::cout << "Hibas a Barat ertekado operatora!" << std::endl;
@@ -397,23 +399,14 @@ int main(void) {
 	//Teszt 13
 	Telefonkonyv T6;
 	
+	Telefonkonyv ures_lesz;
 	Telefonkonyv ures;
+	
+	ures_lesz = ures;
+		
+	T6 = T4;
 
-	try {
-		T6 = ures;
-	}
-	catch (const char* hiba) {
-		std::cout << hiba << std::endl;
-	}
-
-
-	try {
-		T6 = T4;
-	}
-	catch (const char* hiba){
-		std::cout << hiba << std::endl;
-	}
-	if (!(T4 == T6)) {
+	if (!(T4 == T6) && !(ures_lesz == ures)) {
 		Hibas_teszt++;
 		std::cout << "Hibas a Telefonkonyv ertekado operatora!\n" << std::endl;
 	}

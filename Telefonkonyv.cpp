@@ -5,8 +5,10 @@
 
 
 Telefonkonyv& Telefonkonyv::operator=(Telefonkonyv const& rhs) {
-	if (rhs.elso == nullptr)
-		throw "A jobboldali telefonkonyv ures, nem lehet mit atmasolni";
+	if (rhs.elso == nullptr) {
+		this->torol_mind();
+		return *this;
+	}
 
 	if (rhs.elso->barat_e())
 		elso = new Barat;
@@ -115,7 +117,6 @@ void Telefonkonyv::hozzaad(Bejegyzes& hozzaadando) {
 	while (akt != nullptr) {	//< Megnezzuk hogy benne van-e mar
 		if (*akt == hozzaadando) {
 			throw "Ez a bejegyzes mar benne van a telefonkonyvben!";
-			return;
 		}
 		akt = akt->getKov();
 	}
@@ -141,7 +142,6 @@ void Telefonkonyv::hozzaad(Bejegyzes& hozzaadando) {
 void Telefonkonyv::kiir(std::ostream& os) const {
 	if (elso == nullptr) {
 		throw "A Telefonkonyv ures, nincs mit kiirni!";
-		return;
 	}
 	Bejegyzes* mozgo = elso;
 	while (mozgo != nullptr)

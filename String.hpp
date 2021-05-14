@@ -113,7 +113,7 @@ public:
     /// == operator:
     /// Ket Stringet hasonlit ossze
     /// Igazat ad vissza, ha azonosak
-    bool operator==(String const& rhs) {
+    bool operator==(String const& rhs) const {
         return (strcmp(pData, rhs.pData) == 0);
     }
 
